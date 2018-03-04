@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders check in screen 1`] = `
+.c1 {
+  background-color: transparent;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.c0 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+<View
+  className="c0"
+>
+  <View
+    className="c1"
+    onLayout={[Function]}
+    style={
+      Array [
+        Object {
+          "backgroundColor": "rgba(255, 255, 255, 0.1)",
+          "borderRadius": 0,
+        },
+        Object {
+          "height": 200,
+          "width": 200,
+        },
+      ]
+    }
+  />
+</View>
+`;
