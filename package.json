@@ -24,20 +24,25 @@
   "jest": {
     "preset": "jest-expo",
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
-        "<rootDir>/__mocks__/mock-file.js"
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/mock-file.js"
     }
   },
   "lint-staged": {
-    "*.js": ["prettier --write *.js", "jest"]
+    "*.js": [
+      "prettier --write *.js",
+      "jest"
+    ]
   },
   "dependencies": {
     "@expo/vector-icons": "^6.3.1",
     "cuid": "^2.1.0",
+    "date-fns": "^1.29.0",
     "expo": "^25.0.0",
     "react": "16.2.0",
     "react-native": "0.52.0",
+    "react-native-calendars": "^1.17.3",
     "react-navigation": "^1.4.0",
-    "styled-components": "^3.1.6"
+    "styled-components": "^3.1.6",
+    "victory-native": "^0.17.1"
   }
 }

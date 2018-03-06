@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import styled from 'styled-components';
 import { DangerZone } from 'expo';
 
-import loaderJSON from '../assets/animations/loading.json';
+import doneJSON from '../assets/animations/done.json';
 
 let { Lottie } = DangerZone;
 
@@ -13,7 +13,7 @@ const Container = styled(View)`
   justify-content: center;
 `;
 
-export default class Loader extends Component {
+export default class Done extends Component {
   state = {
     width: 0,
     height: 0,
@@ -33,20 +33,11 @@ export default class Loader extends Component {
 
   render = () => {
     return (
-      <Container
-        onLayout={this.onLayout}
-        style={[
-          {
-            borderRadius: this.state.width / 2,
-            backgroundColor: 'rgba(255, 255, 255, 0.1)',
-          },
-          this.props.style,
-        ]}
-      >
+      <Container onLayout={this.onLayout} style={this.props.style}>
         {this.state.width > 0 &&
           this.state.height > 0 && (
             <Lottie
-              loop
+              loop={false}
               style={{
                 height: this.state.height,
                 width: this.state.width,
@@ -54,7 +45,7 @@ export default class Loader extends Component {
               ref={ref => {
                 this.animation = ref;
               }}
-              source={loaderJSON}
+              source={doneJSON}
             />
           )}
       </Container>

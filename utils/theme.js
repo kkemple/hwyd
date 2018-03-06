@@ -1,6 +1,7 @@
 import {
   /* colors */
   APPLE_VALLEY,
+  BLACK,
   BREWED_MUSTARD,
   CREAMY_PEACH,
   OLD_GERANIUM,
@@ -22,6 +23,7 @@ import {
 export default {
   colors: {
     appleValley: APPLE_VALLEY,
+    black: BLACK,
     brewedMustard: BREWED_MUSTARD,
     creamyPeach: CREAMY_PEACH,
     oldGeranium: OLD_GERANIUM,

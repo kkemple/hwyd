@@ -1,15 +1,15 @@
-export type Rating = "GOOD" | "BAD";
+export type Rating = 'GOOD' | 'BAD';
 
 export type CheckInData = {
-  date: Date,
-  rating: Rating,
-  note?: string
+  date: string,
+  result: Rating,
+  note?: string,
 };
 
 export type CheckIn = CheckInData & {
-  id: string
+  id: string,
 };
 
 export type Store = {
-  check_ins: CheckIn[]
+  check_ins: CheckIn[],
 };

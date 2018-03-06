@@ -3,11 +3,12 @@ import { View } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import styled, { ThemeProvider } from 'styled-components';
 import { Font } from 'expo';
+import { Entypo } from '@expo/vector-icons';
 
 import * as Screens from './screens';
 import { Loader } from './components';
 import theme from './utils/theme';
-import { OLD_GERANIUM, ROGUE_PINK } from './utils/constants';
+import { OLD_GERANIUM, ROGUE_PINK, WHITE } from './utils/constants';
 
 const LoaderContainer = styled(View)`
   flex: 1;
@@ -17,29 +18,52 @@ const LoaderContainer = styled(View)`
 
 const TabbedNavigation = TabNavigator(
   {
-    CheckIN: {
+    Today: {
       screen: Screens.CheckIn,
     },
     Calendar: {
       screen: Screens.Calendar,
     },
-    Journal: {
-      screen: Screens.Journal,
-    },
-    Reports: {
+    // Journal: {
+    //   screen: Screens.Journal,
+    // },
+    Report: {
       screen: Screens.Reports,
     },
   },
   {
     tabBarPosition: 'bottom',
     tabBarOptions: {
+      inactiveTintColor: ROGUE_PINK,
+      inactiveBackgroundColor: OLD_GERANIUM,
+      activeTintColor: WHITE,
+      activeBackgroundColor: OLD_GERANIUM,
       style: {
-        backgroundColor: OLD_GERANIUM,
+        // backgroundColor: OLD_GERANIUM,
       },
       indicatorStyle: {
         backgroundColor: ROGUE_PINK,
       },
     },
+    navigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, tintColor }) => {
+        const { routeName } = navigation.state;
+        let iconName;
+        switch (routeName) {
+          case 'Today':
+            iconName = 'emoji-neutral';
+            break;
+          case 'Calendar':
+            iconName = 'calendar';
+            break;
+          case 'Report':
+            iconName = 'bar-graph';
+            break;
+        }
+
+        return <Entypo name={iconName} size={25} color={tintColor} />;
+      },
+    }),
   },
 );
 
@@ -67,7 +91,7 @@ export default class App extends Component {
       </ThemeProvider>
     ) : (
       <LoaderContainer>
-        <Loader style={{ width: 200, height: 200 }} />
+        <Loader style={{ width: 180, height: 180 }} />
       </LoaderContainer>
     );
   }
