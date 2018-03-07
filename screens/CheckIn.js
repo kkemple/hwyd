@@ -1,3 +1,5 @@
+/* @flow */
+
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import styled from 'styled-components';
@@ -5,11 +7,27 @@ import { LinearGradient, Constants } from 'expo';
 import { Entypo } from '@expo/vector-icons';
 import parse from 'date-fns/parse';
 import format from 'date-fns/format';
+import type {
+  NavigationScreenProp,
+  NavigationStateRoute,
+} from 'react-navigation';
 
 import { Button, ButtonText, Done, Loader } from '../components';
 import { getCheckIns, addCheckIn } from '../utils/actions';
 import { ROGUE_PINK, ROSY_HIGHLIGHT } from '../utils/constants';
-import type { CheckInData } from '../types';
+import type { CheckInData } from '../utils/types';
+
+type Props = {
+  navigation: NavigationScreenProp<NavigationStateRoute>,
+};
+
+type State = {
+  isToday: boolean,
+  loading: boolean,
+  hasCheckInForToday: boolean,
+  date: string,
+  displayDate: ?string,
+};
 
 const ButtonsContainer = styled(View)`
   flex-direction: row;
@@ -55,7 +73,7 @@ const BackButton = styled(Button.Transparent)`
   left: -8;
 `;
 
-export default class CheckIn extends Component {
+export default class CheckIn extends Component<Props, State> {
   state = {
     isToday: !this.props.navigation.state.params,
     loading: true,

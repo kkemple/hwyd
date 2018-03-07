@@ -1,9 +1,12 @@
-import React from 'react';
+/* @flow */
+
+import React, { Component } from 'react';
 import { Dimensions, Text, View, ScrollView } from 'react-native';
 import { LinearGradient } from 'expo';
 import styled from 'styled-components';
 import { VictoryChart, VictoryLine } from 'victory-native';
 import { sortBy } from 'lodash';
+import { Entypo } from '@expo/vector-icons';
 
 import { ROGUE_PINK, ROSY_HIGHLIGHT, OLD_GERANIUM } from '../utils/constants';
 import {
@@ -11,7 +14,11 @@ import {
   addCheckInsListener,
   removeCheckInsListener,
 } from '../utils/actions';
-import Entypo from '@expo/vector-icons/Entypo';
+import type { CheckIn } from '../utils/types';
+
+type State = {
+  checkIns: CheckIn[],
+};
 
 const Container = styled(View)`
   flex: 1;
@@ -69,7 +76,9 @@ const Title = styled(Text)`
   text-align: center;
 `;
 
-export default class Home extends React.Component {
+export default class Home extends Component<*, State> {
+  checkInsListener: number;
+
   state = {
     checkIns: [],
   };

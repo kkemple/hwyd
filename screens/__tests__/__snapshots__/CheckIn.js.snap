@@ -1,15 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders check in screen 1`] = `
-.c4 {
-  color: #cf6a87;
-  font-family: lato-black;
-}
-
-.c3 {
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
+.c1 {
+  background-color: transparent;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -34,124 +27,24 @@ exports[`renders check in screen 1`] = `
   justify-content: center;
 }
 
-.c2 {
-  font-family: lato-black;
-  font-size: 48;
-  margin-bottom: 24;
-  text-align: center;
-}
-
-.c1 {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-}
-
 <View
   className="c0"
 >
-  <ExponentLinearGradient
+  <View
     className="c1"
-    colors={
+    onLayout={[Function]}
+    style={
       Array [
-        4294485442,
-        4294432660,
+        Object {
+          "backgroundColor": "rgba(255, 255, 255, 0.1)",
+          "borderRadius": 0,
+        },
+        Object {
+          "height": 100,
+          "width": 100,
+        },
       ]
     }
-    endPoint={undefined}
-    locations={null}
-    startPoint={undefined}
   />
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    className="c2"
-    ellipsizeMode="tail"
-  >
-    How was your day?
-  </Text>
-  <View
-    className="c3"
-  >
-    <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
-      accessible={true}
-      collapsable={undefined}
-      hasTVPreferredFocus={undefined}
-      hitSlop={undefined}
-      isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "marginRight": 8,
-          "opacity": 1,
-        }
-      }
-      testID={undefined}
-      tvParallaxProperties={undefined}
-    >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        className="c4"
-        ellipsizeMode="tail"
-      >
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        />
-      </Text>
-    </View>
-    <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
-      accessible={true}
-      collapsable={undefined}
-      hasTVPreferredFocus={undefined}
-      hitSlop={undefined}
-      isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "opacity": 1,
-        }
-      }
-      testID={undefined}
-      tvParallaxProperties={undefined}
-    >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        className="c4"
-        ellipsizeMode="tail"
-      >
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        />
-      </Text>
-    </View>
-  </View>
 </View>
 `;

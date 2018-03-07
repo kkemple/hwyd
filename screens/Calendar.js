@@ -1,3 +1,5 @@
+/* @flow */
+
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { StackNavigator } from 'react-navigation';
@@ -17,7 +19,6 @@ import isBefore from 'date-fns/is_before';
 
 import CheckIn from './CheckIn';
 import { Button, ButtonText } from '../components';
-
 import {
   BLACK,
   BOLD_FONT,
@@ -26,15 +27,24 @@ import {
   REGULAR_FONT,
   ROGUE_PINK,
   ROSY_HIGHLIGHT,
-  SQUEAKY,
   TITLE_FONT,
   WHITE,
 } from '../utils/constants';
 import {
-  getCheckIns,
   addCheckInsListener,
+  getCheckIns,
   removeCheckInsListener,
 } from '../utils/actions';
+import type { CheckIn as CheckInType } from '../utils/types';
+
+type State = {
+  markedDates: {
+    [key: string]: {
+      marked: boolean,
+      disabled: boolean,
+    },
+  },
+};
 
 const calendarTheme = {
   backgroundColor: 'transparent',
@@ -71,7 +81,7 @@ const ButtonsContainer = styled(View)`
 `;
 
 const Title = styled(Text)`
-  font-family: ${props => `${props.theme.fonts.title}`};
+  font-family: ${props => props.theme.fonts.title};
   font-size: 36;
   margin-bottom: 24;
   text-align: center;
@@ -84,7 +94,9 @@ const CheckInModal = styled(View)`
   padding: 16px;
 `;
 
-export class Calendar extends Component {
+export class Calendar extends Component<*, State> {
+  checkInsListener: number;
+
   state = {
     markedDates: {},
   };
@@ -118,7 +130,7 @@ export class Calendar extends Component {
     );
   }
 
-  setMarkedDates = (checkIns: CheckIn[]) => {
+  setMarkedDates = (checkIns: CheckInType[]) => {
     const calendarDates = this.buildCalendarDates();
     const markedDates = {};
     calendarDates.forEach(cd => {

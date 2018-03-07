@@ -2,14 +2,10 @@ import {
   /* colors */
   APPLE_VALLEY,
   BLACK,
-  BREWED_MUSTARD,
-  CREAMY_PEACH,
   OLD_GERANIUM,
   PENCIL_LEAD,
   ROGUE_PINK,
   ROSY_HIGHLIGHT,
-  SOFT_BLUE,
-  SQUEAKY,
   WHITE,
 
   /* fonts */
@@ -22,16 +18,11 @@ import {
 
 export default {
   colors: {
-    appleValley: APPLE_VALLEY,
     black: BLACK,
-    brewedMustard: BREWED_MUSTARD,
-    creamyPeach: CREAMY_PEACH,
     oldGeranium: OLD_GERANIUM,
     pencilLead: PENCIL_LEAD,
     roguePink: ROGUE_PINK,
     rosyHighlight: ROSY_HIGHLIGHT,
-    softBlue: SOFT_BLUE,
-    squeaky: SQUEAKY,
     white: WHITE,
   },
   fonts: {

@@ -1,3 +1,5 @@
+/* @flow */
+
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { TabNavigator } from 'react-navigation';
@@ -9,6 +11,10 @@ import * as Screens from './screens';
 import { Loader } from './components';
 import theme from './utils/theme';
 import { OLD_GERANIUM, ROGUE_PINK, WHITE } from './utils/constants';
+
+type State = {
+  fontsLoaded: boolean,
+};
 
 const LoaderContainer = styled(View)`
   flex: 1;
@@ -38,9 +44,6 @@ const TabbedNavigation = TabNavigator(
       inactiveBackgroundColor: OLD_GERANIUM,
       activeTintColor: WHITE,
       activeBackgroundColor: OLD_GERANIUM,
-      style: {
-        // backgroundColor: OLD_GERANIUM,
-      },
       indicatorStyle: {
         backgroundColor: ROGUE_PINK,
       },
@@ -67,7 +70,7 @@ const TabbedNavigation = TabNavigator(
   },
 );
 
-export default class App extends Component {
+export default class App extends Component<*, State> {
   state = {
     fontsLoaded: false,
   };

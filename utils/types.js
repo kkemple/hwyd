@@ -1,3 +1,5 @@
+/* @flow */
+
 export type Rating = 'GOOD' | 'BAD';
 
 export type CheckInData = {

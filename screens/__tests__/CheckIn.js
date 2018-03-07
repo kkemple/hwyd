@@ -10,7 +10,7 @@ it('renders check in screen', () => {
   const tree = renderer
     .create(
       <ThemeProvider theme={theme}>
-        <CheckIn />
+        <CheckIn navigation={{ state: {} }} />
       </ThemeProvider>,
     )
     .toJSON();

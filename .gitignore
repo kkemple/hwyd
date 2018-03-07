@@ -6,6 +6,9 @@
 # expo
 .expo/
 
+#jest
+.jestCache/
+
 # dependencies
 /node_modules
 

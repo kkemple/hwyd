@@ -1,3 +1,5 @@
+/* @flow */
+
 import cuid from 'cuid';
 
 import { setLocalData, getLocalData } from './storage';

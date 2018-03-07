@@ -3,7 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "babel-eslint": "^8.2.2",
+    "eslint": "^4.18.2",
+    "eslint-config-prettier": "^2.9.0",
     "flow-bin": "^0.66.0",
+    "flow-typed": "^2.3.0",
     "glow": "^1.2.2",
     "jest-expo": "25.0.0",
     "jest-styled-components": "^5.0.0",
@@ -19,19 +23,24 @@
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
     "test": "jest",
-    "pre:commit": "lint-staged"
+    "pre:commit": "lint-staged",
+    "flow": "glow",
+    "flow:typed": "flow-typed install",
+    "lint": "eslint --fix **/*.js"
   },
   "jest": {
     "preset": "jest-expo",
+    "cacheDirectory": "<rootDir>/.jestCache",
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/mock-file.js"
-    }
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+        "<rootDir>/__mocks__/mock-file.js"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!(react-native|react-*|expo|victory-*))"
+    ]
   },
   "lint-staged": {
-    "*.js": [
-      "prettier --write *.js",
-      "jest"
-    ]
+    "*.js": ["prettier --write *.js", "jest"]
   },
   "dependencies": {
     "@expo/vector-icons": "^6.3.1",

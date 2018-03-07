@@ -1,11 +1,13 @@
-import { AsyncStorage } from "react-native";
+/* @flow */
 
-import { STORE_DEFAULTS } from "./constants";
-import type { Store } from "./types";
+import { AsyncStorage } from 'react-native';
 
-export const getLocalData = async (): Store => {
+import { STORE_DEFAULTS } from './constants';
+import type { Store } from './types';
+
+export const getLocalData = async (): Promise<Store> => {
   try {
-    const config: JSON = await AsyncStorage.getItem("@HWYD:store");
+    const config: string = await AsyncStorage.getItem('@HWYD:store');
     return { ...STORE_DEFAULTS, ...(config ? JSON.parse(config) : {}) };
   } catch (error) {
     console.error(error);
@@ -13,8 +15,10 @@ export const getLocalData = async (): Store => {
   }
 };
 
-export const setLocalData = async (operator: Store => Object) => {
+export const setLocalData = async (
+  operator: Store => Object,
+): Promise<void> => {
   const config: Store = await getLocalData();
   const newConfig = operator(config);
-  return AsyncStorage.mergeItem("@HWYD:store", JSON.stringify(newConfig));
+  return AsyncStorage.mergeItem('@HWYD:store', JSON.stringify(newConfig));
 };
