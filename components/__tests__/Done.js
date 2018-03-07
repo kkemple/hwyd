@@ -4,19 +4,17 @@ import { ThemeProvider } from 'styled-components';
 import { shallow } from 'enzyme';
 import 'jest-styled-components';
 
-import { Button, ButtonText } from '../Button';
+import Done from '../Done';
 import theme from '../../utils/theme';
 
-describe('<Button />', () => {
-  it('renders a transparent button (no background color)', () => {
+describe('<Done />', () => {
+  it('renders a done with check in animation', () => {
     const tree = shallow(
       <ThemeProvider theme={theme}>
-        <Button.Transparent>
-          <Text>Press Me</Text>
-        </Button.Transparent>
+        <Done />
       </ThemeProvider>,
     );
-    const root = tree.find(Button.Transparent).shallow();
+    const root = tree.find(Done).shallow();
     expect(root).toMatchSnapshot();
   });
 });

@@ -76,7 +76,7 @@ const Title = styled(Text)`
   text-align: center;
 `;
 
-export default class Home extends Component<*, State> {
+export default class Reports extends Component<*, State> {
   checkInsListener: number;
 
   state = {

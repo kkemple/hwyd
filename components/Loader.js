@@ -20,7 +20,7 @@ export default class Loader extends Component {
   };
 
   componentDidUpdate = () => {
-    if (this.state.width > 0 && this.state.height > 0) {
+    if (this.state.width > 0 && this.state.height > 0 && this.animation) {
       this.animation.reset();
       this.animation.play();
     }

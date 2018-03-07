@@ -2,20 +2,6 @@
   "name": "@kkemple/hwyd",
   "version": "0.1.0",
   "private": true,
-  "devDependencies": {
-    "babel-eslint": "^8.2.2",
-    "eslint": "^4.18.2",
-    "eslint-config-prettier": "^2.9.0",
-    "flow-bin": "^0.66.0",
-    "flow-typed": "^2.3.0",
-    "glow": "^1.2.2",
-    "jest-expo": "25.0.0",
-    "jest-styled-components": "^5.0.0",
-    "lint-staged": "^7.0.0",
-    "prettier": "^1.11.1",
-    "react-native-scripts": "1.11.1",
-    "react-test-renderer": "16.2.0"
-  },
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
     "start": "react-native-scripts start",
@@ -31,16 +17,36 @@
   "jest": {
     "preset": "jest-expo",
     "cacheDirectory": "<rootDir>/.jestCache",
+    "snapshotSerializers": ["enzyme-to-json/serializer"],
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
         "<rootDir>/__mocks__/mock-file.js"
     },
     "transformIgnorePatterns": [
-      "node_modules/(?!(react-native|react-*|expo|victory-*))"
-    ]
+      "node_modules/(?!(react-native|react-*|expo|@expo-*|victory-*))"
+    ],
+    "setupFiles": ["<rootDir>/test-setup.js"]
   },
   "lint-staged": {
     "*.js": ["prettier --write *.js", "jest"]
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.2",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.3.1",
+    "eslint": "^4.18.2",
+    "eslint-config-prettier": "^2.9.0",
+    "flow-bin": "^0.66.0",
+    "flow-typed": "^2.3.0",
+    "glow": "^1.2.2",
+    "jest-expo": "25.0.0",
+    "jest-styled-components": "^5.0.0",
+    "lint-staged": "^7.0.0",
+    "prettier": "^1.11.1",
+    "react-dom": "16",
+    "react-native-scripts": "1.11.1",
+    "react-test-renderer": "16.2.0"
   },
   "dependencies": {
     "@expo/vector-icons": "^6.3.1",

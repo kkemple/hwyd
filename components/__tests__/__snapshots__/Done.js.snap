@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Done /> renders a done with check in animation 1`] = `
+<Styled(View)
+  onLayout={[Function]}
+/>
+`;

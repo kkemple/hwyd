@@ -1,0 +1,98 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Calendar /> renders 1`] = `
+<Styled(View)>
+  <Styled(LinearGradient)
+    colors={
+      Array [
+        "#f8a5c2",
+        "#f7d794",
+      ]
+    }
+  />
+  <CalendarList
+    futureScrollRange={0}
+    markedDates={Object {}}
+    onDayPress={[Function]}
+    pastScrollRange={12}
+    style={
+      Object {
+        "paddingTop": 24,
+      }
+    }
+    theme={
+      Object {
+        "backgroundColor": "transparent",
+        "calendarBackground": "transparent",
+        "dayTextColor": "#000000",
+        "dotColor": "#cf6a87",
+        "selectedDayBackgroundColor": "#cf6a87",
+        "selectedDayTextColor": "#ffffff",
+        "textDayFontFamily": "libre-regular",
+        "textDayHeaderFontFamily": "lato-black",
+        "textDisabledColor": "#596275",
+        "textMonthFontFamily": "libre-bold",
+        "textMonthFontSize": 18,
+        "textSectionTitleColor": "#cf6a87",
+        "todayTextColor": "#cf6a87",
+      }
+    }
+  />
+</Styled(View)>
+`;
+
+exports[`<Calendar /> renders with markedDates 1`] = `
+<Styled(View)>
+  <Styled(LinearGradient)
+    colors={
+      Array [
+        "#f8a5c2",
+        "#f7d794",
+      ]
+    }
+  />
+  <CalendarList
+    futureScrollRange={0}
+    markedDates={
+      Object {
+        "03-02-2018": Object {
+          "disabled": false,
+          "marked": true,
+        },
+        "03-03-2018": Object {
+          "disabled": false,
+          "marked": true,
+        },
+        "03-04-2018": Object {
+          "disabled": false,
+          "marked": true,
+        },
+      }
+    }
+    onDayPress={[Function]}
+    pastScrollRange={12}
+    style={
+      Object {
+        "paddingTop": 24,
+      }
+    }
+    theme={
+      Object {
+        "backgroundColor": "transparent",
+        "calendarBackground": "transparent",
+        "dayTextColor": "#000000",
+        "dotColor": "#cf6a87",
+        "selectedDayBackgroundColor": "#cf6a87",
+        "selectedDayTextColor": "#ffffff",
+        "textDayFontFamily": "libre-regular",
+        "textDayHeaderFontFamily": "lato-black",
+        "textDisabledColor": "#596275",
+        "textMonthFontFamily": "libre-bold",
+        "textMonthFontSize": 18,
+        "textSectionTitleColor": "#cf6a87",
+        "todayTextColor": "#cf6a87",
+      }
+    }
+  />
+</Styled(View)>
+`;

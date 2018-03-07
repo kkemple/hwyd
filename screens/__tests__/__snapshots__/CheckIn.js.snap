@@ -1,50 +1,83 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders check in screen 1`] = `
-.c1 {
-  background-color: transparent;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-}
-
-.c0 {
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-}
-
-<View
-  className="c0"
->
-  <View
-    className="c1"
-    onLayout={[Function]}
-    style={
+exports[`<CheckIn /> renders check in state 1`] = `
+<Styled(View)>
+  <Styled(LinearGradient)
+    colors={
       Array [
-        Object {
-          "backgroundColor": "rgba(255, 255, 255, 0.1)",
-          "borderRadius": 0,
-        },
-        Object {
-          "height": 100,
-          "width": 100,
-        },
+        "#f8a5c2",
+        "#f7d794",
       ]
     }
   />
-</View>
+  <Styled(Text)>
+    How was your day?
+  </Styled(Text)>
+  <Styled(View)>
+    <Styled(TouchableOpacity)
+      onPress={[Function]}
+      style={
+        Object {
+          "marginRight": 8,
+        }
+      }
+    >
+      <Styled(Text)>
+        <Icon
+          allowFontScaling={false}
+          name="emoji-happy"
+          size={98}
+        />
+      </Styled(Text)>
+    </Styled(TouchableOpacity)>
+    <Styled(TouchableOpacity)
+      onPress={[Function]}
+    >
+      <Styled(Text)>
+        <Icon
+          allowFontScaling={false}
+          name="emoji-sad"
+          size={98}
+        />
+      </Styled(Text)>
+    </Styled(TouchableOpacity)>
+  </Styled(View)>
+</Styled(View)>
+`;
+
+exports[`<CheckIn /> renders done state 1`] = `
+<Styled(View)>
+  <Styled(LinearGradient)
+    colors={
+      Array [
+        "#f8a5c2",
+        "#f7d794",
+      ]
+    }
+  />
+  <Styled(Text)>
+    Another Day Recorded!
+  </Styled(Text)>
+  <Done
+    style={
+      Object {
+        "height": 200,
+        "width": 200,
+      }
+    }
+  />
+</Styled(View)>
+`;
+
+exports[`<CheckIn /> renders loading state 1`] = `
+<Styled(View)>
+  <Loader
+    style={
+      Object {
+        "height": 100,
+        "width": 100,
+      }
+    }
+  />
+</Styled(View)>
 `;
