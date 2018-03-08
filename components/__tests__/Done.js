@@ -1,5 +1,4 @@
 import React from 'react';
-import { Text } from 'react-native';
 import { ThemeProvider } from 'styled-components';
 import { shallow } from 'enzyme';
 import 'jest-styled-components';

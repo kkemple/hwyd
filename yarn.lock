@@ -6510,6 +6510,10 @@ react-native-scripts@1.11.1:
     rimraf "^2.6.1"
     xdl "48.0.2"
 
+react-native-sideswipe@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.npmjs.org/react-native-sideswipe/-/react-native-sideswipe-1.4.0.tgz#21a016063857c3bff6d3fe119c3c4a2a83d1ed5d"
+
 "react-native-svg@https://github.com/expo/react-native-svg/archive/5.5.1-exp.1.tar.gz":
   version "5.5.1"
   resolved "https://github.com/expo/react-native-svg/archive/5.5.1-exp.1.tar.gz#0c6e373dbe63cfcbdd465f5b2965ebe011c8962f"

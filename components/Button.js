@@ -1,7 +1,7 @@
+/* @flow */
+
 import { TouchableOpacity, Text } from 'react-native';
 import styled from 'styled-components';
-
-import { colors } from '../utils/constants';
 
 const DefaultButton = styled(TouchableOpacity)`
   align-items: center;

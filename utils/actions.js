@@ -40,24 +40,20 @@ export const removeCheckIn = async (id: string): Promise<void> => {
 
 export const editCheckIn = async (
   id: string,
-  result: string,
+  checkIn: CheckIn,
 ): Promise<CheckIn | void> => {
   await setLocalData((store: Store) => ({
     check_ins: store.check_ins.map(ci => {
       if (ci.id !== id) return ci;
 
-      return {
-        ...ci,
-        result,
-      };
+      return { ...checkIn };
     }),
   }));
 
   const checkIns = await getCheckIns();
-  listeners.forEach(fn => fn(checkIns));
+  listeners.forEach(fn => fn([...checkIns]));
 
-  const checkIn = checkIns.find(ci => ci.id === id);
-  return checkIn;
+  return { ...checkIn };
 };
 
 export const getCheckIns = async (): Promise<CheckIn[]> => {

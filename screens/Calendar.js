@@ -18,15 +18,13 @@ import isAfter from 'date-fns/is_after';
 import isBefore from 'date-fns/is_before';
 
 import CheckIn from './CheckIn';
-import { Button, ButtonText } from '../components';
+import { Button, ButtonText, BackgroundGradient } from '../components';
 import {
   BLACK,
   BOLD_FONT,
   OLD_GERANIUM,
   PENCIL_LEAD,
   REGULAR_FONT,
-  ROGUE_PINK,
-  ROSY_HIGHLIGHT,
   TITLE_FONT,
   WHITE,
 } from '../utils/constants';
@@ -64,14 +62,6 @@ const calendarTheme = {
 
 const Container = styled(View)`
   flex: 1;
-`;
-
-const Background = styled(LinearGradient)`
-  bottom: 0;
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
 `;
 
 const ButtonsContainer = styled(View)`
@@ -117,7 +107,7 @@ export class Calendar extends Component<*, State> {
   render() {
     return (
       <Container>
-        <Background colors={[ROGUE_PINK, ROSY_HIGHLIGHT]} />
+        <BackgroundGradient />
         <CalendarList
           futureScrollRange={0}
           markedDates={this.state.markedDates}

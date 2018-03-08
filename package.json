@@ -17,18 +17,25 @@
   "jest": {
     "preset": "jest-expo",
     "cacheDirectory": "<rootDir>/.jestCache",
-    "snapshotSerializers": ["enzyme-to-json/serializer"],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
-        "<rootDir>/__mocks__/mock-file.js"
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/mock-file.js"
     },
     "transformIgnorePatterns": [
       "node_modules/(?!(react-native|react-*|expo|@expo-*|victory-*))"
     ],
-    "setupFiles": ["<rootDir>/test-setup.js"]
+    "setupFiles": [
+      "<rootDir>/test-setup.js"
+    ]
   },
   "lint-staged": {
-    "*.js": ["prettier --write *.js", "glow", "jest"]
+    "*.js": [
+      "prettier --write *.js",
+      "glow",
+      "jest"
+    ]
   },
   "devDependencies": {
     "babel-eslint": "^8.2.2",
@@ -56,6 +63,7 @@
     "react": "16.2.0",
     "react-native": "0.52.0",
     "react-native-calendars": "^1.17.3",
+    "react-native-sideswipe": "^1.4.0",
     "react-navigation": "^1.4.0",
     "styled-components": "^3.1.6",
     "victory-native": "^0.17.1"

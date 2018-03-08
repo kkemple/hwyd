@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<JournalEntry /> renders a journal entry 1`] = `
+<Styled(AnimatedComponent)
+  style={false}
+>
+  <Styled(View)>
+    <Styled(Text)>
+      March 2nd, 2018
+    </Styled(Text)>
+    <Styled(Icon)
+      color="#cf6a87"
+      name="emoji-happy"
+      size={16}
+    />
+    <Styled(View) />
+    <Styled(AnimatedComponent)
+      style={false}
+    >
+      Today was...
+    </Styled(AnimatedComponent)>
+  </Styled(View)>
+</Styled(AnimatedComponent)>
+`;
+
+exports[`<JournalEntry /> renders a journal entry with no title 1`] = `
+<Styled(AnimatedComponent)
+  style={false}
+>
+  <Styled(View)>
+    <Styled(AnimatedComponent)
+      style={false}
+    >
+      Today was...
+    </Styled(AnimatedComponent)>
+  </Styled(View)>
+</Styled(AnimatedComponent)>
+`;
+
+exports[`<JournalEntry /> renders an animated journal entry 1`] = `
+<Styled(AnimatedComponent)
+  style={
+    Object {
+      "transform": Array [
+        Object {
+          "scale": 1.1,
+        },
+      ],
+    }
+  }
+>
+  <Styled(View)>
+    <Styled(Text)>
+      March 2nd, 2018
+    </Styled(Text)>
+    <Styled(Icon)
+      color="#cf6a87"
+      name="emoji-happy"
+      size={16}
+    />
+    <Styled(View) />
+    <Styled(AnimatedComponent)
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      Today was...
+    </Styled(AnimatedComponent)>
+  </Styled(View)>
+</Styled(AnimatedComponent)>
+`;

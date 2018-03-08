@@ -2,14 +2,7 @@
 
 exports[`<Calendar /> renders 1`] = `
 <Styled(View)>
-  <Styled(LinearGradient)
-    colors={
-      Array [
-        "#f8a5c2",
-        "#f7d794",
-      ]
-    }
-  />
+  <BackgroundGradient />
   <CalendarList
     futureScrollRange={0}
     markedDates={Object {}}
@@ -43,14 +36,7 @@ exports[`<Calendar /> renders 1`] = `
 
 exports[`<Calendar /> renders with markedDates 1`] = `
 <Styled(View)>
-  <Styled(LinearGradient)
-    colors={
-      Array [
-        "#f8a5c2",
-        "#f7d794",
-      ]
-    }
-  />
+  <BackgroundGradient />
   <CalendarList
     futureScrollRange={0}
     markedDates={

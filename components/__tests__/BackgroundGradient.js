@@ -3,18 +3,17 @@ import { ThemeProvider } from 'styled-components';
 import { shallow } from 'enzyme';
 import 'jest-styled-components';
 
-import Loader from '../Loader';
+import BackgroundGradient from '../BackgroundGradient';
 import theme from '../../utils/theme';
 
-describe('<Loader />', () => {
-  it('renders a loading animation', () => {
+describe('<BackgroundGradient />', () => {
+  it('renders a linear gradient background', () => {
     const tree = shallow(
       <ThemeProvider theme={theme}>
-        <Loader />
+        <BackgroundGradient />
       </ThemeProvider>,
     );
-    const root = tree.find(Loader).shallow();
-    root.setState({ width: 100, height: 100 });
+    const root = tree.find(BackgroundGradient).shallow();
     expect(root).toMatchSnapshot();
   });
 });

@@ -2,91 +2,103 @@
 
 exports[`<CheckIn /> renders check in state 1`] = `
 <Styled(View)>
-  <Styled(LinearGradient)
-    colors={
-      Array [
-        "#f8a5c2",
-        "#f7d794",
-      ]
-    }
-  />
-  <Styled(Text)>
-    How was your day?
-  </Styled(Text)>
-  <Styled(View)>
-    <Styled(TouchableOpacity)
-      onPress={[Function]}
-      style={
-        Object {
-          "marginRight": 8,
+  <BackgroundGradient />
+  <Styled(KeyboardAvoidingView)
+    behavior="padding"
+  >
+    <Styled(Text)>
+      How was your day?
+    </Styled(Text)>
+    <Styled(View)>
+      <Styled(TouchableOpacity)
+        onPress={[Function]}
+        style={
+          Object {
+            "marginRight": 8,
+          }
         }
-      }
-    >
-      <Styled(Text)>
-        <Icon
-          allowFontScaling={false}
-          name="emoji-happy"
-          size={98}
-        />
-      </Styled(Text)>
-    </Styled(TouchableOpacity)>
-    <Styled(TouchableOpacity)
-      onPress={[Function]}
-    >
-      <Styled(Text)>
-        <Icon
-          allowFontScaling={false}
-          name="emoji-sad"
-          size={98}
-        />
-      </Styled(Text)>
-    </Styled(TouchableOpacity)>
-  </Styled(View)>
+      >
+        <Styled(Text)>
+          <Icon
+            allowFontScaling={false}
+            name="emoji-happy"
+            size={98}
+          />
+        </Styled(Text)>
+      </Styled(TouchableOpacity)>
+      <Styled(TouchableOpacity)
+        onPress={[Function]}
+      >
+        <Styled(Text)>
+          <Icon
+            allowFontScaling={false}
+            name="emoji-sad"
+            size={98}
+          />
+        </Styled(Text)>
+      </Styled(TouchableOpacity)>
+    </Styled(View)>
+    <Styled(TextInput)
+      autoCorrect={true}
+      multiline={true}
+      onChangeText={[Function]}
+      placeholder="Today was..."
+      placeholderTextColor="#596275"
+      selectionColor="#cf6a87"
+      underlineColorAndroid="transparent"
+    />
+  </Styled(KeyboardAvoidingView)>
 </Styled(View)>
 `;
 
 exports[`<CheckIn /> renders done state 1`] = `
 <Styled(View)>
-  <Styled(LinearGradient)
-    colors={
-      Array [
-        "#f8a5c2",
-        "#f7d794",
-      ]
-    }
-  />
-  <Styled(Text)>
-    How was your day?
-  </Styled(Text)>
-  <Styled(View)>
-    <Styled(TouchableOpacity)
-      onPress={[Function]}
-      style={
-        Object {
-          "marginRight": 8,
+  <BackgroundGradient />
+  <Styled(KeyboardAvoidingView)
+    behavior="padding"
+  >
+    <Styled(Text)>
+      How was your day?
+    </Styled(Text)>
+    <Styled(View)>
+      <Styled(TouchableOpacity)
+        onPress={[Function]}
+        style={
+          Object {
+            "marginRight": 8,
+          }
         }
-      }
-    >
-      <Styled(Text)>
-        <Icon
-          allowFontScaling={false}
-          name="emoji-happy"
-          size={98}
-        />
-      </Styled(Text)>
-    </Styled(TouchableOpacity)>
-    <Styled(TouchableOpacity)
-      onPress={[Function]}
-    >
-      <Styled(Text)>
-        <Icon
-          allowFontScaling={false}
-          name="emoji-sad"
-          size={98}
-        />
-      </Styled(Text)>
-    </Styled(TouchableOpacity)>
-  </Styled(View)>
+      >
+        <Styled(Text)>
+          <Icon
+            allowFontScaling={false}
+            name="emoji-happy"
+            size={98}
+          />
+        </Styled(Text)>
+      </Styled(TouchableOpacity)>
+      <Styled(TouchableOpacity)
+        onPress={[Function]}
+      >
+        <Styled(Text)>
+          <Icon
+            allowFontScaling={false}
+            name="emoji-sad"
+            size={98}
+          />
+        </Styled(Text)>
+      </Styled(TouchableOpacity)>
+    </Styled(View)>
+    <Styled(TextInput)
+      autoCorrect={true}
+      multiline={true}
+      onChangeText={[Function]}
+      placeholder="Today was..."
+      placeholderTextColor="#596275"
+      selectionColor="#cf6a87"
+      underlineColorAndroid="transparent"
+    />
+  </Styled(KeyboardAvoidingView)>
 </Styled(View)>
 `;
 

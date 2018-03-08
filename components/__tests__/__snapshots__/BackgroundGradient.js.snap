@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<BackgroundGradient /> renders a linear gradient background 1`] = `
+<Styled(LinearGradient)
+  colors={
+    Array [
+      "#f8a5c2",
+      "#f7d794",
+    ]
+  }
+/>
+`;

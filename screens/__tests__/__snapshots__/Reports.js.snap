@@ -2,14 +2,7 @@
 
 exports[`<Reports /> renders a no check ins state 1`] = `
 <Styled(View)>
-  <Styled(LinearGradient)
-    colors={
-      Array [
-        "#f8a5c2",
-        "#f7d794",
-      ]
-    }
-  />
+  <BackgroundGradient />
   <Styled(Text)>
     Nothing to Report Yet!
   </Styled(Text)>
@@ -18,14 +11,7 @@ exports[`<Reports /> renders a no check ins state 1`] = `
 
 exports[`<Reports /> renders reports for check ins 1`] = `
 <Styled(View)>
-  <Styled(LinearGradient)
-    colors={
-      Array [
-        "#f8a5c2",
-        "#f7d794",
-      ]
-    }
-  />
+  <BackgroundGradient />
   <Styled(ScrollView)
     contentContainerStyle={
       Object {

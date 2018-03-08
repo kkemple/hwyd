@@ -30,14 +30,15 @@ const TabbedNavigation = TabNavigator(
     Calendar: {
       screen: Screens.Calendar,
     },
-    // Journal: {
-    //   screen: Screens.Journal,
-    // },
+    Journal: {
+      screen: Screens.Journal,
+    },
     Report: {
       screen: Screens.Reports,
     },
   },
   {
+    swipeEnabled: false,
     tabBarPosition: 'bottom',
     tabBarOptions: {
       inactiveTintColor: ROGUE_PINK,
@@ -61,6 +62,9 @@ const TabbedNavigation = TabNavigator(
             break;
           case 'Calendar':
             iconName = 'calendar';
+            break;
+          case 'Journal':
+            iconName = 'book';
             break;
           case 'Report':
             iconName = 'bar-graph';

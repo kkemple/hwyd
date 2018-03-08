@@ -5,7 +5,7 @@ export type Rating = 'GOOD' | 'BAD';
 export type CheckInData = {
   date: string,
   result: Rating,
-  note?: string,
+  note?: ?string,
 };
 
 export type CheckIn = CheckInData & {

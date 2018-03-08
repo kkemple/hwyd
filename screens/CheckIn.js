@@ -1,7 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import { Text, TextInput, View } from 'react-native';
+import { KeyboardAvoidingView, Text, TextInput, View } from 'react-native';
 import styled from 'styled-components';
 import { LinearGradient, Constants } from 'expo';
 import { Entypo } from '@expo/vector-icons';
@@ -12,11 +12,20 @@ import type {
   NavigationStateRoute,
 } from 'react-navigation';
 
-import { Button, ButtonText, checkIn, Loader, Done } from '../components';
-import { getCheckIns, addCheckIn, editCheckIn } from '../utils/actions';
+import {
+  BackgroundGradient,
+  Button,
+  ButtonText,
+  checkIn,
+  Done,
+  JournalEntry,
+  Loader,
+} from '../components';
+import { addCheckIn, editCheckIn, getCheckIns } from '../utils/actions';
 import {
   DONE_ANIMATION_SPEED,
   OLD_GERANIUM,
+  PENCIL_LEAD,
   ROGUE_PINK,
   ROSY_HIGHLIGHT,
 } from '../utils/constants';
@@ -33,6 +42,7 @@ type State = {
   editing: boolean,
   isToday: boolean,
   loading: boolean,
+  note: ?string,
   showDoneAnimation: boolean,
 };
 
@@ -67,14 +77,6 @@ const DisplayDate = styled(Text)`
   text-align: center;
 `;
 
-const Background = styled(LinearGradient)`
-  bottom: 0;
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-`;
-
 const BackButton = styled(Button.Transparent)`
   left: 0;
   position: absolute;
@@ -87,9 +89,31 @@ const EditButton = styled(Button.Transparent)`
   top: 32;
 `;
 
+const CancelButton = styled(Button.Transparent)`
+  position: absolute;
+  right: 0;
+  top: 32;
+`;
+
 const NoteForm = styled(TextInput)`
-  color: ${props => props.theme.colors.pencilLead};
-  padding: 4;
+  align-self: stretch;
+  color: ${props => props.theme.colors.oldGeranium};
+  font-size: 18;
+  padding: 8px;
+  margin: 16px;
+`;
+
+const KeyboardView = styled(KeyboardAvoidingView)`
+  align-items: stretch;
+  flex: 1;
+  justify-content: center;
+`;
+
+const Note = styled(Text)`
+  color: ${props => props.theme.colors.oldGeranium};
+  margin-top: 8px;
+  max-width: 300px;
+  text-align: center;
 `;
 
 export default class CheckIn extends Component<Props, State> {
@@ -116,6 +140,7 @@ export default class CheckIn extends Component<Props, State> {
     const todaysCheckIn = checkIns.find(c => c.date === this.state.date);
 
     this.setState(() => ({
+      note: !!todaysCheckIn ? todaysCheckIn.note : undefined,
       checkIn: todaysCheckIn,
       loading: false,
     }));
@@ -128,7 +153,7 @@ export default class CheckIn extends Component<Props, State> {
       </Container>
     ) : this.state.checkIn && !this.state.editing ? (
       <Container>
-        <Background colors={[ROGUE_PINK, ROSY_HIGHLIGHT]} />
+        <BackgroundGradient />
 
         {!this.state.isToday && (
           <BackButton onPress={() => this.props.navigation.pop()}>
@@ -136,11 +161,14 @@ export default class CheckIn extends Component<Props, State> {
           </BackButton>
         )}
 
-        {this.state.checkIn && (
-          <EditButton onPress={() => this.setState(() => ({ editing: true }))}>
-            <Entypo size={26} name="pencil" color={OLD_GERANIUM} />
-          </EditButton>
-        )}
+        {this.state.checkIn &&
+          !this.state.showDoneAnimation && (
+            <EditButton
+              onPress={() => this.setState(() => ({ editing: true }))}
+            >
+              <Entypo size={26} name="pencil" color={OLD_GERANIUM} />
+            </EditButton>
+          )}
 
         {!this.state.isToday && (
           <DisplayDate>{this.state.displayDate}</DisplayDate>
@@ -149,97 +177,140 @@ export default class CheckIn extends Component<Props, State> {
         {this.state.showDoneAnimation ? (
           <Done style={{ width: 200, height: 200 }} />
         ) : (
-          <Entypo
-            color={OLD_GERANIUM}
-            size={98}
-            name={
-              this.state.checkIn.result === 'GOOD' ? 'emoji-happy' : 'emoji-sad'
-            }
-          />
+          [
+            <Entypo
+              key="result"
+              color={OLD_GERANIUM}
+              size={98}
+              name={
+                this.state.checkIn.result === 'GOOD'
+                  ? 'emoji-happy'
+                  : 'emoji-sad'
+              }
+            />,
+            !!this.state.checkIn.note && (
+              <JournalEntry noTitle key="note" {...this.state.checkIn} />
+            ),
+          ]
         )}
       </Container>
     ) : (
       <Container>
-        <Background colors={[ROGUE_PINK, ROSY_HIGHLIGHT]} />
-
+        <BackgroundGradient />
         {!this.state.isToday && (
           <BackButton onPress={() => this.props.navigation.pop()}>
             <Entypo size={24} name="chevron-thin-left" color={OLD_GERANIUM} />
           </BackButton>
         )}
 
-        {!this.state.isToday && (
-          <DisplayDate>{this.state.displayDate}</DisplayDate>
+        {this.state.editing && (
+          <CancelButton
+            onPress={() => this.setState(() => ({ editing: false }))}
+          >
+            <Entypo size={26} name="cross" color={OLD_GERANIUM} />
+          </CancelButton>
         )}
 
-        <Title>How was your day?</Title>
+        <KeyboardView behavior="padding">
+          {!this.state.isToday && (
+            <DisplayDate>{this.state.displayDate}</DisplayDate>
+          )}
 
-        <ButtonsContainer>
-          <Button.Transparent
-            style={{ marginRight: 8 }}
-            onPress={async () => {
-              let checkIn;
+          <Title>How was your day?</Title>
 
-              if (this.state.checkIn) {
-                checkIn = await editCheckIn(this.state.checkIn.id, 'GOOD');
-              } else {
-                checkIn = await addCheckIn({
-                  date: this.state.date,
-                  result: 'GOOD',
-                });
-              }
+          <ButtonsContainer>
+            <Button.Transparent
+              style={{ marginRight: 8 }}
+              onPress={async () => {
+                let checkIn;
 
-              this.setState(
-                () => ({
-                  checkIn: checkIn,
-                  editing: false,
-                  showDoneAnimation: true,
-                }),
-                () =>
-                  setTimeout(
-                    () => this.setState(() => ({ showDoneAnimation: false })),
-                    DONE_ANIMATION_SPEED,
-                  ),
-              );
-            }}
-          >
-            <ButtonText.Transparent>
-              <Entypo size={98} name="emoji-happy" />
-            </ButtonText.Transparent>
-          </Button.Transparent>
+                if (this.state.checkIn) {
+                  const data = {
+                    ...this.state.checkIn,
+                    date: this.state.checkIn.date,
+                    note: this.state.note,
+                    result: 'GOOD',
+                  };
 
-          <Button.Transparent
-            onPress={async () => {
-              let checkIn;
+                  checkIn = await editCheckIn(this.state.checkIn.id, data);
+                } else {
+                  checkIn = await addCheckIn({
+                    date: this.state.date,
+                    note: this.state.note,
+                    result: 'GOOD',
+                  });
+                }
 
-              if (this.state.checkIn) {
-                checkIn = await editCheckIn(this.state.checkIn.id, 'BAD');
-              } else {
-                checkIn = await addCheckIn({
-                  date: this.state.date,
-                  result: 'BAD',
-                });
-              }
+                this.setState(
+                  () => ({
+                    checkIn,
+                    editing: false,
+                    showDoneAnimation: true,
+                  }),
+                  () =>
+                    setTimeout(
+                      () => this.setState(() => ({ showDoneAnimation: false })),
+                      DONE_ANIMATION_SPEED,
+                    ),
+                );
+              }}
+            >
+              <ButtonText.Transparent>
+                <Entypo size={98} name="emoji-happy" />
+              </ButtonText.Transparent>
+            </Button.Transparent>
 
-              this.setState(
-                () => ({
-                  checkIn: checkIn,
-                  editing: false,
-                  showDoneAnimation: true,
-                }),
-                () =>
-                  setTimeout(
-                    () => this.setState(() => ({ showDoneAnimation: false })),
-                    DONE_ANIMATION_SPEED,
-                  ),
-              );
-            }}
-          >
-            <ButtonText.Transparent>
-              <Entypo size={98} name="emoji-sad" />
-            </ButtonText.Transparent>
-          </Button.Transparent>
-        </ButtonsContainer>
+            <Button.Transparent
+              onPress={async () => {
+                let checkIn;
+
+                if (this.state.checkIn) {
+                  const data = {
+                    ...this.state.checkIn,
+                    note: this.state.note,
+                    result: 'BAD',
+                  };
+
+                  checkIn = await editCheckIn(this.state.checkIn.id, data);
+                } else {
+                  checkIn = await addCheckIn({
+                    date: this.state.date,
+                    note: this.state.note,
+                    result: 'BAD',
+                  });
+                }
+
+                this.setState(
+                  () => ({
+                    checkIn,
+                    editing: false,
+                    showDoneAnimation: true,
+                  }),
+                  () =>
+                    setTimeout(
+                      () => this.setState(() => ({ showDoneAnimation: false })),
+                      DONE_ANIMATION_SPEED,
+                    ),
+                );
+              }}
+            >
+              <ButtonText.Transparent>
+                <Entypo size={98} name="emoji-sad" />
+              </ButtonText.Transparent>
+            </Button.Transparent>
+          </ButtonsContainer>
+
+          <NoteForm
+            autoCorrect
+            multiline
+            placeholder="Today was..."
+            placeholderTextColor={PENCIL_LEAD}
+            underlineColorAndroid="transparent"
+            selectionColor={OLD_GERANIUM}
+            value={this.state.note}
+            onChangeText={text => this.setState(() => ({ note: text }))}
+          />
+        </KeyboardView>
       </Container>
     );
   }

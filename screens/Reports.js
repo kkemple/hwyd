@@ -8,6 +8,7 @@ import { VictoryChart, VictoryLine } from 'victory-native';
 import { sortBy } from 'lodash';
 import { Entypo } from '@expo/vector-icons';
 
+import { BackgroundGradient } from '../components';
 import { ROGUE_PINK, ROSY_HIGHLIGHT, OLD_GERANIUM } from '../utils/constants';
 import {
   getCheckIns,
@@ -23,14 +24,6 @@ type State = {
 const Container = styled(View)`
   flex: 1;
   padding: 48px 24px;
-`;
-
-const Background = styled(LinearGradient)`
-  bottom: 0;
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
 `;
 
 const ChartTitle = styled(Text)`
@@ -106,7 +99,7 @@ export default class Reports extends Component<*, State> {
     if (checkIns.length < 7) {
       return (
         <Container>
-          <Background colors={[ROGUE_PINK, ROSY_HIGHLIGHT]} />
+          <BackgroundGradient />
           <Title>Nothing to Report Yet!</Title>
         </Container>
       );
@@ -119,7 +112,7 @@ export default class Reports extends Component<*, State> {
 
     return (
       <Container>
-        <Background colors={[ROGUE_PINK, ROSY_HIGHLIGHT]} />
+        <BackgroundGradient />
         <ChartsContainer
           contentContainerStyle={{ alignItems: 'center', paddingVertical: 36 }}
         >

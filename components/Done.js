@@ -1,9 +1,25 @@
+/* @flow */
+
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import styled from 'styled-components';
 import { DangerZone } from 'expo';
 
 import doneJSON from '../assets/animations/done.json';
+
+type State = {
+  width: number,
+  height: number,
+};
+
+type LayoutEvent = {
+  nativeEvent: {
+    layout: {
+      width: number,
+      height: number,
+    },
+  },
+};
 
 let { Lottie } = DangerZone;
 
@@ -13,7 +29,9 @@ const Container = styled(View)`
   justify-content: center;
 `;
 
-export default class Done extends Component {
+export default class Done extends Component<*, State> {
+  animation: Lottie;
+
   state = {
     width: 0,
     height: 0,
@@ -24,11 +42,6 @@ export default class Done extends Component {
       this.animation.reset();
       this.animation.play();
     }
-  };
-
-  onLayout = ({ nativeEvent: { layout: { width, height } } }) => {
-    if (width === 0 || height === 0) return;
-    this.setState(() => ({ width, height }));
   };
 
   render = () => {
@@ -50,5 +63,10 @@ export default class Done extends Component {
           )}
       </Container>
     );
+  };
+
+  onLayout = ({ nativeEvent: { layout: { width, height } } }: LayoutEvent) => {
+    if (width === 0 || height === 0) return;
+    this.setState(() => ({ width, height }));
   };
 }
