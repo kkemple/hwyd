@@ -1,7 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { StatusBar, Text, View } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import styled from 'styled-components';
 import { CalendarList } from 'react-native-calendars';
@@ -107,6 +107,7 @@ export class Calendar extends Component<*, State> {
   render() {
     return (
       <Container>
+        <StatusBar barStyle="light-content" backgroundColor={OLD_GERANIUM} />
         <BackgroundGradient />
         <CalendarList
           futureScrollRange={0}

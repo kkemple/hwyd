@@ -1,7 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import { Dimensions, Text, View, ScrollView } from 'react-native';
+import { Dimensions, StatusBar, Text, View, ScrollView } from 'react-native';
 import { LinearGradient } from 'expo';
 import styled from 'styled-components';
 import { VictoryChart, VictoryLine } from 'victory-native';
@@ -112,6 +112,7 @@ export default class Reports extends Component<*, State> {
 
     return (
       <Container>
+        <StatusBar barStyle="light-content" backgroundColor={OLD_GERANIUM} />
         <BackgroundGradient />
         <ChartsContainer
           contentContainerStyle={{ alignItems: 'center', paddingVertical: 36 }}

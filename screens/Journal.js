@@ -1,7 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import { Dimensions, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, StatusBar, StyleSheet, Text, View } from 'react-native';
 import styled from 'styled-components';
 import SideSwipe from 'react-native-sideswipe';
 import { sortBy } from 'lodash';
@@ -12,6 +12,7 @@ import {
   getCheckIns,
   removeCheckInsListener,
 } from '../utils/actions';
+import { OLD_GERANIUM } from '../utils/constants';
 import type { CheckIn } from '../utils/types';
 
 type State = {
@@ -78,6 +79,7 @@ export default class Journal extends Component<*, State> {
     const offset = (screenWidth - JournalEntry.WIDTH) / 2;
     return (
       <Container>
+        <StatusBar barStyle="light-content" backgroundColor={OLD_GERANIUM} />
         <BackgroundGradient />
 
         <Title>Journal</Title>

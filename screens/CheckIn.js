@@ -1,7 +1,13 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import { KeyboardAvoidingView, Text, TextInput, View } from 'react-native';
+import {
+  KeyboardAvoidingView,
+  StatusBar,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
 import styled from 'styled-components';
 import { LinearGradient, Constants } from 'expo';
 import { Entypo } from '@expo/vector-icons';
@@ -149,10 +155,12 @@ export default class CheckIn extends Component<Props, State> {
   render() {
     return this.state.loading ? (
       <Container>
+        <StatusBar barStyle="light-content" backgroundColor={OLD_GERANIUM} />
         <Loader style={{ width: 100, height: 100 }} />
       </Container>
     ) : this.state.checkIn && !this.state.editing ? (
       <Container>
+        <StatusBar barStyle="light-content" backgroundColor={OLD_GERANIUM} />
         <BackgroundGradient />
 
         {!this.state.isToday && (
@@ -196,6 +204,7 @@ export default class CheckIn extends Component<Props, State> {
       </Container>
     ) : (
       <Container>
+        <StatusBar barStyle="light-content" backgroundColor={OLD_GERANIUM} />
         <BackgroundGradient />
         {!this.state.isToday && (
           <BackButton onPress={() => this.props.navigation.pop()}>
@@ -211,12 +220,12 @@ export default class CheckIn extends Component<Props, State> {
           </CancelButton>
         )}
 
-        <KeyboardView behavior="padding">
+        <KeyboardView behavior="height">
           {!this.state.isToday && (
             <DisplayDate>{this.state.displayDate}</DisplayDate>
           )}
 
-          <Title>How was your day?</Title>
+          {!this.state.editing && <Title>How was your day?</Title>}
 
           <ButtonsContainer>
             <Button.Transparent
@@ -302,7 +311,9 @@ export default class CheckIn extends Component<Props, State> {
 
           <NoteForm
             autoCorrect
+            blurOnSubmit
             multiline
+            returnKeyType="done"
             placeholder="Today was..."
             placeholderTextColor={PENCIL_LEAD}
             underlineColorAndroid="transparent"

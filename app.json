@@ -1,6 +1,16 @@
 {
   "expo": {
     "slug": "hwyd",
-    "sdkVersion": "25.0.0"
+    "sdkVersion": "25.0.0",
+    "privacy": "public",
+    "description": "Quickly track your ups and downs (with journal)",
+    "name": "HWYD",
+    "version": "1.0.0",
+    "githubUrl": "https://github.com/kkemple/hwyd",
+    "orientation": "portrait",
+    "primaryColor": "#cf6a87",
+    "androidStatusBar": {
+      "backgroundColor": "#cf6a87"
+    }
   }
 }
