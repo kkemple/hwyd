@@ -180,14 +180,15 @@ export default class CheckIn extends Component<Props, State> {
             onPress={async () => {
               let checkIn;
 
-              if (this.state.editing && this.state.checkIn) {
+              if (this.state.checkIn) {
                 checkIn = await editCheckIn(this.state.checkIn.id, 'GOOD');
               } else {
-                const checkIn = await addCheckIn({
+                checkIn = await addCheckIn({
                   date: this.state.date,
                   result: 'GOOD',
                 });
               }
+
               this.setState(
                 () => ({
                   checkIn: checkIn,
@@ -211,14 +212,15 @@ export default class CheckIn extends Component<Props, State> {
             onPress={async () => {
               let checkIn;
 
-              if (this.state.editing && this.state.checkIn) {
+              if (this.state.checkIn) {
                 checkIn = await editCheckIn(this.state.checkIn.id, 'BAD');
               } else {
-                const checkIn = await addCheckIn({
+                checkIn = await addCheckIn({
                   date: this.state.date,
                   result: 'BAD',
                 });
               }
+
               this.setState(
                 () => ({
                   checkIn: checkIn,

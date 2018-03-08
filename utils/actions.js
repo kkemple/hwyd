@@ -42,24 +42,21 @@ export const editCheckIn = async (
   id: string,
   result: string,
 ): Promise<CheckIn | void> => {
-  let checkIn;
-
   await setLocalData((store: Store) => ({
     check_ins: store.check_ins.map(ci => {
       if (ci.id !== id) return ci;
 
-      checkIn = {
+      return {
         ...ci,
         result,
       };
-
-      return checkIn;
     }),
   }));
 
   const checkIns = await getCheckIns();
   listeners.forEach(fn => fn(checkIns));
 
+  const checkIn = checkIns.find(ci => ci.id === id);
   return checkIn;
 };
 
