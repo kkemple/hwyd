@@ -1,7 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, TextInput, View } from 'react-native';
 import styled from 'styled-components';
 import { LinearGradient, Constants } from 'expo';
 import { Entypo } from '@expo/vector-icons';
@@ -12,32 +12,39 @@ import type {
   NavigationStateRoute,
 } from 'react-navigation';
 
-import { Button, ButtonText, Done, Loader } from '../components';
-import { getCheckIns, addCheckIn } from '../utils/actions';
-import { ROGUE_PINK, ROSY_HIGHLIGHT } from '../utils/constants';
-import type { CheckInData } from '../utils/types';
+import { Button, ButtonText, checkIn, Loader, Done } from '../components';
+import { getCheckIns, addCheckIn, editCheckIn } from '../utils/actions';
+import {
+  DONE_ANIMATION_SPEED,
+  OLD_GERANIUM,
+  ROGUE_PINK,
+  ROSY_HIGHLIGHT,
+} from '../utils/constants';
+import type { CheckInData, CheckIn as CheckInType } from '../utils/types';
 
 type Props = {
   navigation: NavigationScreenProp<NavigationStateRoute>,
 };
 
 type State = {
-  isToday: boolean,
-  loading: boolean,
-  hasCheckInForToday: boolean,
+  checkIn: CheckInType | null,
   date: string,
   displayDate: ?string,
+  editing: boolean,
+  isToday: boolean,
+  loading: boolean,
+  showDoneAnimation: boolean,
 };
 
 const ButtonsContainer = styled(View)`
-  flex-direction: row;
   align-items: center;
+  flex-direction: row;
   justify-content: center;
 `;
 
 const Container = styled(View)`
-  flex: 1;
   align-items: center;
+  flex: 1;
   justify-content: center;
 `;
 
@@ -53,31 +60,41 @@ const Title = styled(Text)`
 `;
 
 const DisplayDate = styled(Text)`
+  color: ${props => props.theme.colors.oldGeranium};
   font-family: ${props => `${props.theme.fonts.subtitle}`};
   font-size: 24;
-  margin-bottom: 16;
+  margin-bottom: 24;
   text-align: center;
 `;
 
 const Background = styled(LinearGradient)`
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
   bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
 `;
 
 const BackButton = styled(Button.Transparent)`
+  left: 0;
   position: absolute;
   top: 32;
-  left: -8;
+`;
+
+const EditButton = styled(Button.Transparent)`
+  position: absolute;
+  right: 0;
+  top: 32;
+`;
+
+const NoteForm = styled(TextInput)`
+  color: ${props => props.theme.colors.pencilLead};
+  padding: 4;
 `;
 
 export default class CheckIn extends Component<Props, State> {
   state = {
-    isToday: !this.props.navigation.state.params,
-    loading: true,
-    hasCheckInForToday: false,
+    checkIn: null,
     date: this.props.navigation.state.params
       ? this.props.navigation.state.params.date.dateString
       : format(new Date(), 'YYYY-MM-DD'),
@@ -87,6 +104,11 @@ export default class CheckIn extends Component<Props, State> {
           'MMMM Do, YYYY',
         )
       : undefined,
+    editing: false,
+    isToday: !this.props.navigation.state.params,
+    loading: true,
+    note: undefined,
+    showDoneAnimation: false,
   };
 
   componentWillMount = async () => {
@@ -94,8 +116,8 @@ export default class CheckIn extends Component<Props, State> {
     const todaysCheckIn = checkIns.find(c => c.date === this.state.date);
 
     this.setState(() => ({
+      checkIn: todaysCheckIn,
       loading: false,
-      hasCheckInForToday: !!todaysCheckIn,
     }));
   };
 
@@ -104,23 +126,37 @@ export default class CheckIn extends Component<Props, State> {
       <Container>
         <Loader style={{ width: 100, height: 100 }} />
       </Container>
-    ) : this.state.hasCheckInForToday ? (
+    ) : this.state.checkIn && !this.state.editing ? (
       <Container>
         <Background colors={[ROGUE_PINK, ROSY_HIGHLIGHT]} />
 
         {!this.state.isToday && (
           <BackButton onPress={() => this.props.navigation.pop()}>
-            <Entypo size={24} name="chevron-thin-left" />
+            <Entypo size={24} name="chevron-thin-left" color={OLD_GERANIUM} />
           </BackButton>
+        )}
+
+        {this.state.checkIn && (
+          <EditButton onPress={() => this.setState(() => ({ editing: true }))}>
+            <Entypo size={26} name="pencil" color={OLD_GERANIUM} />
+          </EditButton>
         )}
 
         {!this.state.isToday && (
           <DisplayDate>{this.state.displayDate}</DisplayDate>
         )}
 
-        <Title>Another Day Recorded!</Title>
-
-        <Done style={{ width: 200, height: 200 }} />
+        {this.state.showDoneAnimation ? (
+          <Done style={{ width: 200, height: 200 }} />
+        ) : (
+          <Entypo
+            color={OLD_GERANIUM}
+            size={98}
+            name={
+              this.state.checkIn.result === 'GOOD' ? 'emoji-happy' : 'emoji-sad'
+            }
+          />
+        )}
       </Container>
     ) : (
       <Container>
@@ -128,7 +164,7 @@ export default class CheckIn extends Component<Props, State> {
 
         {!this.state.isToday && (
           <BackButton onPress={() => this.props.navigation.pop()}>
-            <Entypo size={24} name="chevron-thin-left" />
+            <Entypo size={24} name="chevron-thin-left" color={OLD_GERANIUM} />
           </BackButton>
         )}
 
@@ -142,11 +178,28 @@ export default class CheckIn extends Component<Props, State> {
           <Button.Transparent
             style={{ marginRight: 8 }}
             onPress={async () => {
-              await addCheckIn({
-                date: this.state.date,
-                result: 'GOOD',
-              });
-              this.setState(() => ({ hasCheckInForToday: true }));
+              let checkIn;
+
+              if (this.state.editing && this.state.checkIn) {
+                checkIn = await editCheckIn(this.state.checkIn.id, 'GOOD');
+              } else {
+                const checkIn = await addCheckIn({
+                  date: this.state.date,
+                  result: 'GOOD',
+                });
+              }
+              this.setState(
+                () => ({
+                  checkIn: checkIn,
+                  editing: false,
+                  showDoneAnimation: true,
+                }),
+                () =>
+                  setTimeout(
+                    () => this.setState(() => ({ showDoneAnimation: false })),
+                    DONE_ANIMATION_SPEED,
+                  ),
+              );
             }}
           >
             <ButtonText.Transparent>
@@ -156,11 +209,28 @@ export default class CheckIn extends Component<Props, State> {
 
           <Button.Transparent
             onPress={async () => {
-              await addCheckIn({
-                date: this.state.date,
-                result: 'BAD',
-              });
-              this.setState(() => ({ hasCheckInForToday: true }));
+              let checkIn;
+
+              if (this.state.editing && this.state.checkIn) {
+                checkIn = await editCheckIn(this.state.checkIn.id, 'BAD');
+              } else {
+                const checkIn = await addCheckIn({
+                  date: this.state.date,
+                  result: 'BAD',
+                });
+              }
+              this.setState(
+                () => ({
+                  checkIn: checkIn,
+                  editing: false,
+                  showDoneAnimation: true,
+                }),
+                () =>
+                  setTimeout(
+                    () => this.setState(() => ({ showDoneAnimation: false })),
+                    DONE_ANIMATION_SPEED,
+                  ),
+              );
             }}
           >
             <ButtonText.Transparent>

@@ -14,13 +14,19 @@ export const removeCheckInsListener = (index: number) => {
   listeners = listeners.filter((_, i) => i !== index);
 };
 
-export const addCheckIn = async (checkIn: CheckInData): Promise<void> => {
+export const addCheckIn = async (
+  checkInData: CheckInData,
+): Promise<CheckIn> => {
+  const checkIn = { ...checkInData, id: cuid() };
+
   await setLocalData((store: Store) => ({
-    check_ins: [...store.check_ins, { ...checkIn, id: cuid() }],
+    check_ins: [...store.check_ins, checkIn],
   }));
 
   const checkIns = await getCheckIns();
   listeners.forEach(fn => fn(checkIns));
+
+  return checkIn;
 };
 
 export const removeCheckIn = async (id: string): Promise<void> => {
@@ -30,6 +36,31 @@ export const removeCheckIn = async (id: string): Promise<void> => {
 
   const checkIns = await getCheckIns();
   listeners.forEach(fn => fn(checkIns));
+};
+
+export const editCheckIn = async (
+  id: string,
+  result: string,
+): Promise<CheckIn | void> => {
+  let checkIn;
+
+  await setLocalData((store: Store) => ({
+    check_ins: store.check_ins.map(ci => {
+      if (ci.id !== id) return ci;
+
+      checkIn = {
+        ...ci,
+        result,
+      };
+
+      return checkIn;
+    }),
+  }));
+
+  const checkIns = await getCheckIns();
+  listeners.forEach(fn => fn(checkIns));
+
+  return checkIn;
 };
 
 export const getCheckIns = async (): Promise<CheckIn[]> => {

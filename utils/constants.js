@@ -20,3 +20,5 @@ export const SUBTITLE_FONT: string = 'lato-thin';
 export const BOLD_FONT: string = 'libre-bold';
 export const REGULAR_FONT: string = 'libre-regular';
 export const ITALIC_FONT: string = 'libre-italic';
+
+export const DONE_ANIMATION_SPEED: number = 3250;

@@ -56,16 +56,37 @@ exports[`<CheckIn /> renders done state 1`] = `
     }
   />
   <Styled(Text)>
-    Another Day Recorded!
+    How was your day?
   </Styled(Text)>
-  <Done
-    style={
-      Object {
-        "height": 200,
-        "width": 200,
+  <Styled(View)>
+    <Styled(TouchableOpacity)
+      onPress={[Function]}
+      style={
+        Object {
+          "marginRight": 8,
+        }
       }
-    }
-  />
+    >
+      <Styled(Text)>
+        <Icon
+          allowFontScaling={false}
+          name="emoji-happy"
+          size={98}
+        />
+      </Styled(Text)>
+    </Styled(TouchableOpacity)>
+    <Styled(TouchableOpacity)
+      onPress={[Function]}
+    >
+      <Styled(Text)>
+        <Icon
+          allowFontScaling={false}
+          name="emoji-sad"
+          size={98}
+        />
+      </Styled(Text)>
+    </Styled(TouchableOpacity)>
+  </Styled(View)>
 </Styled(View)>
 `;
 
