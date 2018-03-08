@@ -2,9 +2,15 @@
 
 exports[`<CheckIn /> renders check in state 1`] = `
 <Styled(View)>
+  <StatusBar
+    animated={false}
+    backgroundColor="#cf6a87"
+    barStyle="light-content"
+    showHideTransition="fade"
+  />
   <BackgroundGradient />
   <Styled(KeyboardAvoidingView)
-    behavior="padding"
+    behavior="height"
   >
     <Styled(Text)>
       How was your day?
@@ -40,10 +46,12 @@ exports[`<CheckIn /> renders check in state 1`] = `
     </Styled(View)>
     <Styled(TextInput)
       autoCorrect={true}
+      blurOnSubmit={true}
       multiline={true}
       onChangeText={[Function]}
       placeholder="Today was..."
       placeholderTextColor="#596275"
+      returnKeyType="done"
       selectionColor="#cf6a87"
       underlineColorAndroid="transparent"
     />
@@ -53,9 +61,15 @@ exports[`<CheckIn /> renders check in state 1`] = `
 
 exports[`<CheckIn /> renders done state 1`] = `
 <Styled(View)>
+  <StatusBar
+    animated={false}
+    backgroundColor="#cf6a87"
+    barStyle="light-content"
+    showHideTransition="fade"
+  />
   <BackgroundGradient />
   <Styled(KeyboardAvoidingView)
-    behavior="padding"
+    behavior="height"
   >
     <Styled(Text)>
       How was your day?
@@ -91,10 +105,12 @@ exports[`<CheckIn /> renders done state 1`] = `
     </Styled(View)>
     <Styled(TextInput)
       autoCorrect={true}
+      blurOnSubmit={true}
       multiline={true}
       onChangeText={[Function]}
       placeholder="Today was..."
       placeholderTextColor="#596275"
+      returnKeyType="done"
       selectionColor="#cf6a87"
       underlineColorAndroid="transparent"
     />
@@ -104,6 +120,12 @@ exports[`<CheckIn /> renders done state 1`] = `
 
 exports[`<CheckIn /> renders loading state 1`] = `
 <Styled(View)>
+  <StatusBar
+    animated={false}
+    backgroundColor="#cf6a87"
+    barStyle="light-content"
+    showHideTransition="fade"
+  />
   <Loader
     style={
       Object {

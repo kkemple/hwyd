@@ -2,6 +2,12 @@
 
 exports[`<Journal /> renders a carousel of notes 1`] = `
 <Styled(View)>
+  <StatusBar
+    animated={false}
+    backgroundColor="#cf6a87"
+    barStyle="light-content"
+    showHideTransition="fade"
+  />
   <BackgroundGradient />
   <Styled(Text)>
     Journal
@@ -50,6 +56,12 @@ exports[`<Journal /> renders a carousel of notes 1`] = `
 
 exports[`<Journal /> renders a single note 1`] = `
 <Styled(View)>
+  <StatusBar
+    animated={false}
+    backgroundColor="#cf6a87"
+    barStyle="light-content"
+    showHideTransition="fade"
+  />
   <BackgroundGradient />
   <Styled(Text)>
     Journal
@@ -67,6 +79,12 @@ exports[`<Journal /> renders a single note 1`] = `
 
 exports[`<Journal /> renders with no notes 1`] = `
 <Styled(View)>
+  <StatusBar
+    animated={false}
+    backgroundColor="#cf6a87"
+    barStyle="light-content"
+    showHideTransition="fade"
+  />
   <BackgroundGradient />
   <Styled(Text)>
     Journal

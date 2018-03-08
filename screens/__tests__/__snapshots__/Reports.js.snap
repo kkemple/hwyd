@@ -11,6 +11,12 @@ exports[`<Reports /> renders a no check ins state 1`] = `
 
 exports[`<Reports /> renders reports for check ins 1`] = `
 <Styled(View)>
+  <StatusBar
+    animated={false}
+    backgroundColor="#cf6a87"
+    barStyle="light-content"
+    showHideTransition="fade"
+  />
   <BackgroundGradient />
   <Styled(ScrollView)
     contentContainerStyle={

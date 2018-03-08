@@ -2,6 +2,12 @@
 
 exports[`<Calendar /> renders 1`] = `
 <Styled(View)>
+  <StatusBar
+    animated={false}
+    backgroundColor="#cf6a87"
+    barStyle="light-content"
+    showHideTransition="fade"
+  />
   <BackgroundGradient />
   <CalendarList
     futureScrollRange={0}
@@ -36,6 +42,12 @@ exports[`<Calendar /> renders 1`] = `
 
 exports[`<Calendar /> renders with markedDates 1`] = `
 <Styled(View)>
+  <StatusBar
+    animated={false}
+    backgroundColor="#cf6a87"
+    barStyle="light-content"
+    showHideTransition="fade"
+  />
   <BackgroundGradient />
   <CalendarList
     futureScrollRange={0}
