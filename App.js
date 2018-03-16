@@ -6,6 +6,7 @@ import { TabNavigator } from 'react-navigation';
 import styled, { ThemeProvider } from 'styled-components';
 import { Font } from 'expo';
 import { Entypo } from '@expo/vector-icons';
+import firebase from 'firebase';
 
 import * as Screens from './screens';
 import { Loader } from './components';
@@ -14,9 +15,11 @@ import { OLD_GERANIUM, ROGUE_PINK, WHITE } from './utils/constants';
 
 type State = {
   fontsLoaded: boolean,
+  loading: boolean,
+  loggedin: boolean,
 };
 
-const LoaderContainer = styled(View)`
+const LoaderContainer = styled(View) `
   flex: 1;
   justify-content: center;
   align-items: center;
@@ -36,6 +39,9 @@ const TabbedNavigation = TabNavigator(
     Report: {
       screen: Screens.Reports,
     },
+    Logout: {
+      screen: Screens.Logout
+    }
   },
   {
     swipeEnabled: false,
@@ -66,6 +72,9 @@ const TabbedNavigation = TabNavigator(
           case 'Journal':
             iconName = 'book';
             break;
+          case 'Logout':
+            iconName = 'log-out';
+            break;
           case 'Report':
             iconName = 'bar-graph';
             break;
@@ -80,6 +89,8 @@ const TabbedNavigation = TabNavigator(
 export default class App extends Component<*, State> {
   state = {
     fontsLoaded: false,
+    loggedin: false,
+    loading: true
   };
 
   componentDidMount = async () => {
@@ -91,18 +102,36 @@ export default class App extends Component<*, State> {
       'libre-regular': require('./assets/fonts/LibreBaskerville-Regular.ttf'),
     });
 
+    var config = {
+      apiKey: "AIzaSyCf_kqb15eEMeplDZ5UgFtlZ-IfKKe1Fr0",
+      authDomain: "hwd-app-3b44a.firebaseapp.com",
+      databaseURL: "https://hwd-app-3b44a.firebaseio.com",
+      projectId: "hwd-app-3b44a",
+      storageBucket: "hwd-app-3b44a.appspot.com",
+      messagingSenderId: "758299686169"
+    };
+    firebase.initializeApp(config);
+
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        return this.setState({ loading: false, loggedin: true })
+      }
+
+      this.setState({ loading: false, loggedin: false })
+    });
+
     this.setState({ fontsLoaded: true });
   };
 
   render() {
-    return this.state.fontsLoaded ? (
+    return this.state.fontsLoaded && !this.state.loading ? (
       <ThemeProvider theme={theme}>
-        <TabbedNavigation />
+        {!this.state.loggedin ? <Screens.Login /> : <TabbedNavigation />}
       </ThemeProvider>
     ) : (
-      <LoaderContainer>
-        <Loader style={{ width: 180, height: 180 }} />
-      </LoaderContainer>
-    );
+        <LoaderContainer>
+          <Loader style={{ width: 180, height: 180 }} />
+        </LoaderContainer>
+      );
   }
 }
