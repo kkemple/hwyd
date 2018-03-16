@@ -10,7 +10,7 @@ exports[`<CheckIn /> renders check in state 1`] = `
   />
   <BackgroundGradient />
   <Styled(KeyboardAvoidingView)
-    behavior="height"
+    behavior="padding"
   >
     <Styled(Text)>
       How was your day?
@@ -69,7 +69,7 @@ exports[`<CheckIn /> renders done state 1`] = `
   />
   <BackgroundGradient />
   <Styled(KeyboardAvoidingView)
-    behavior="height"
+    behavior="padding"
   >
     <Styled(Text)>
       How was your day?
