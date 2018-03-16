@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import {
   KeyboardAvoidingView,
+  Platform,
   StatusBar,
   Text,
   TextInput,
@@ -220,7 +221,9 @@ export default class CheckIn extends Component<Props, State> {
           </CancelButton>
         )}
 
-        <KeyboardView behavior="height">
+        <KeyboardView
+          behavior={Platform.OS === 'android' ? 'height' : 'padding'}
+        >
           {!this.state.isToday && (
             <DisplayDate>{this.state.displayDate}</DisplayDate>
           )}
