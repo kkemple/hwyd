@@ -21,8 +21,8 @@ import {
 
 type State = {
   loading: boolean,
-  email: ?string,
-  password: ?string,
+  email: string,
+  password: string,
   error: ?string,
 };
 
@@ -39,11 +39,11 @@ const Error = styled(Text) `
   margin: 20px;
 `
 
-export default class Login extends Component<State> {
+export default class Login extends Component<*, State> {
 
   state = { email: '', password: '', error: '', loading: false };
 
-  register(email, password) {
+  register(email: string = '', password: string = '') {
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(() => { this.setState({ error: '', loading: false }); })
       .catch((error) => {

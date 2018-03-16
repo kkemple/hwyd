@@ -16,7 +16,7 @@ const Container = styled(View) `
   justify-content: center;
 `;
 
-export default class Logout extends Component {
+export default class Logout extends Component<*, *> {
 
   async componentDidMount() {
     const { navigate } = this.props.navigation;

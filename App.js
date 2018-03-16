@@ -15,8 +15,8 @@ import { OLD_GERANIUM, ROGUE_PINK, WHITE } from './utils/constants';
 
 type State = {
   fontsLoaded: boolean,
-  userData: boolean,
-  loggedIn: boolean,
+  loading: boolean,
+  loggedin: boolean,
 };
 
 const LoaderContainer = styled(View) `
