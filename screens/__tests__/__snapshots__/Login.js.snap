@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Login /> renders 1`] = `
+<Styled(View)>
+  <StatusBar
+    animated={false}
+    backgroundColor="#cf6a87"
+    barStyle="light-content"
+    showHideTransition="fade"
+  />
+  <BackgroundGradient />
+  <Input
+    label="Email Address"
+    onChangeText={[Function]}
+    placeholder="you@domain.com"
+    type="email"
+    value=""
+  />
+  <Input
+    autoCorrect={false}
+    label="Password"
+    onChangeText={[Function]}
+    placeholder="*******"
+    secureTextEntry={true}
+    type="password"
+    value=""
+  />
+  <Styled(Text) />
+  <Styled(Text)
+    onPress={[Function]}
+    type="submit"
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      Log in/Register
+    </Text>
+  </Styled(Text)>
+</Styled(View)>
+`;

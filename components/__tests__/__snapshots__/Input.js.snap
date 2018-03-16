@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Input /> renders a password input 1`] = `
+<Styled(View)>
+  <Styled(Text)>
+    PASSWORD
+  </Styled(Text)>
+  <Styled(TextInput)
+    autoCorrect={false}
+    placeholder="*******"
+    secureTextEntry={true}
+    type="password"
+  />
+</Styled(View)>
+`;
+
+exports[`<Input /> renders an email input 1`] = `
+<Styled(View)>
+  <Styled(Text)>
+    EMAIL ADDRESS
+  </Styled(Text)>
+  <Styled(TextInput)
+    autoCorrect={false}
+    placeholder="you@domain.com"
+    type="email"
+  />
+</Styled(View)>
+`;
