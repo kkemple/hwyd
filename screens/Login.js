@@ -7,9 +7,18 @@ import {
 } from 'react-native';
 import styled from 'styled-components';
 import firebase from 'firebase';
+import { Entypo } from '@expo/vector-icons';
 
 import {
-  OLD_GERANIUM
+  googleLogin,
+  loginCreditial,
+  facebookLogin
+} from '../utils/firebase';
+
+import {
+  OLD_GERANIUM,
+  GOOGLE_COLOR,
+  FACEBOOK_COLOR
 } from '../utils/constants';
 
 import {
@@ -39,6 +48,36 @@ const Error = styled(Text) `
   margin: 20px;
 `
 
+const LoginWith = styled(ButtonText.Outline) `
+    text-decoration: none;
+    color: white;
+    min-width: 200px;
+    padding: 13px 0;
+    text-align: center;
+    margin: 12px auto;
+    background: ${FACEBOOK_COLOR};
+    display: flex;
+    align-items: center;
+
+    ${props => props.google && `
+      background: ${GOOGLE_COLOR};
+    `}
+`;
+
+const LoginText = styled(View) `
+  margin-left: 10px;
+  width: 12px;
+  height: 12px;
+  margin-top: 14px;
+`;
+
+const Title = styled(Text) `
+  color: ${props => props.theme.colors.oldGeranium};
+  font-family: ${props => props.theme.fonts.italic};
+  font-size: 24px;
+  margin: 20px auto;
+`;
+
 export default class Login extends Component<*, State> {
 
   state = { email: '', password: '', error: '', loading: false };
@@ -59,6 +98,46 @@ export default class Login extends Component<*, State> {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(() => this.setState({ loading: false }))
       .catch(() => this.register(email, password));
+  }
+
+  async onGoogleLogin() {
+    this.setState({
+      loading: true
+    });
+
+    const { type, idToken } = await googleLogin();
+    if (type === 'success') {
+      const credential = await firebase.auth.GoogleAuthProvider.credential(idToken);
+      await loginCreditial(credential);
+
+      return this.setState({
+        loading: false
+      })
+    }
+
+    this.setState({
+      error: 'There was a problem with the login'
+    })
+  }
+
+  async onFacebookLogin() {
+    this.setState({
+      loading: true
+    });
+    const { type, token } = await facebookLogin()
+
+    if (type === 'success') {
+      const credential = firebase.auth.FacebookAuthProvider.credential(token);
+      await loginCreditial(credential);
+
+      return this.setState({
+        loading: false
+      })
+    }
+
+    this.setState({
+      error: 'There was a problem with the login'
+    })
   }
 
 
@@ -102,7 +181,16 @@ export default class Login extends Component<*, State> {
           ) : <Text>Log in/Register</Text>
           }
         </ButtonText.Default>
-      </Container >
+        <Title>OR</Title>
+        <LoginWith type="submit" onPress={this.onFacebookLogin.bind(this)}>
+          <Text>Continue with</Text>
+          <LoginText><Entypo name="facebook" size={12} color="#fff" /></LoginText>
+        </LoginWith>
+        <LoginWith google type="submit" onPress={this.onGoogleLogin.bind(this)}>
+          <Text>Continue with</Text>
+          <LoginText><Entypo name="google-" size={12} color="#fff" /></LoginText>
+        </LoginWith>
+      </Container>
     );
   }
 }

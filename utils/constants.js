@@ -13,6 +13,9 @@ export const PENCIL_LEAD: string = '#596275';
 export const OLD_GERANIUM: string = '#cf6a87';
 export const ROGUE_PINK: string = '#f8a5c2';
 export const ROSY_HIGHLIGHT: string = '#f7d794';
+export const GOOGLE_COLOR: string = '#e9544f';
+export const FACEBOOK_COLOR: string = '#3a589a';
+
 
 /* font families */
 export const TITLE_FONT: string = 'lato-black';

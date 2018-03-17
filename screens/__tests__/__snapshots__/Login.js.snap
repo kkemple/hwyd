@@ -38,5 +38,49 @@ exports[`<Login /> renders 1`] = `
       Log in/Register
     </Text>
   </Styled(Text)>
+  <Styled(Text)>
+    OR
+  </Styled(Text)>
+  <Styled(Styled(Text))
+    onPress={[Function]}
+    type="submit"
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      Continue with
+    </Text>
+    <Styled(View)>
+      <Icon
+        allowFontScaling={false}
+        color="#fff"
+        name="facebook"
+        size={12}
+      />
+    </Styled(View)>
+  </Styled(Styled(Text))>
+  <Styled(Styled(Text))
+    google={true}
+    onPress={[Function]}
+    type="submit"
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      Continue with
+    </Text>
+    <Styled(View)>
+      <Icon
+        allowFontScaling={false}
+        color="#fff"
+        name="google-"
+        size={12}
+      />
+    </Styled(View)>
+  </Styled(Styled(Text))>
 </Styled(View)>
 `;
