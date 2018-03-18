@@ -63,9 +63,11 @@ const ChartLabel = styled(Text)`
 `;
 
 const Title = styled(Text)`
-  font-family: ${props => props.theme.fonts.title};
-  font-size: 40;
-  margin-bottom: 36;
+  color: ${props => props.theme.colors.oldGeranium};
+  font-family: ${props => props.theme.fonts.italic};
+  font-size: 24px;
+  margin: 48px 24px;
+  margin-bottom: 0;
   text-align: center;
 `;
 
@@ -115,7 +117,7 @@ export default class Reports extends Component<*, State> {
         <StatusBar barStyle="light-content" backgroundColor={OLD_GERANIUM} />
         <BackgroundGradient />
         <ChartsContainer
-          contentContainerStyle={{ alignItems: 'center', paddingVertical: 36 }}
+          contentContainerStyle={{ alignItems: 'center', paddingVertical: 48 }}
         >
           <ChartContainer key={'seven-day-overview'}>
             <ChartTitle>LAST WEEK</ChartTitle>
