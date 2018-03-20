@@ -1,6 +1,6 @@
 /* @flow */
 
-export type Rating = 'GOOD' | 'BAD';
+export type Rating = 'GOOD' | 'BAD' | 'AVERAGE';
 
 export type CheckInData = {
   date: string,

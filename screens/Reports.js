@@ -69,6 +69,21 @@ const Title = styled(Text)`
   text-align: center;
 `;
 
+const deriveCountFromResult = (
+  result: string,
+  currentCount: number,
+): number => {
+  switch (result) {
+    case 'GOOD':
+      return currentCount + 1;
+    case 'BAD':
+      return currentCount - 1;
+    case 'AVERAGE':
+    default:
+      return currentCount;
+  }
+};
+
 export default class Reports extends Component<*, State> {
   checkInsListener: number;
 
@@ -135,9 +150,13 @@ export default class Reports extends Component<*, State> {
                 <Entypo name="emoji-happy" color={OLD_GERANIUM} size={16} />
                 {` ${lastWeekData.totalGood}`}
               </ChartLabel>
-              <ChartLabel>
+              <ChartLabel style={{ marginRight: 16 }}>
                 <Entypo name="emoji-sad" color={OLD_GERANIUM} size={16} />
                 {` ${lastWeekData.totalBad}`}
+              </ChartLabel>
+              <ChartLabel>
+                <Entypo name="emoji-neutral" color={OLD_GERANIUM} size={16} />
+                {` ${lastWeekData.totalAverage}`}
               </ChartLabel>
             </ChartLegend>
           </ChartContainer>
@@ -160,9 +179,13 @@ export default class Reports extends Component<*, State> {
                   <Entypo name="emoji-happy" color={OLD_GERANIUM} size={16} />
                   {` ${lastMonthData.totalGood}`}
                 </ChartLabel>
-                <ChartLabel>
+                <ChartLabel style={{ marginRight: 16 }}>
                   <Entypo name="emoji-sad" color={OLD_GERANIUM} size={16} />
                   {` ${lastMonthData.totalBad}`}
+                </ChartLabel>
+                <ChartLabel>
+                  <Entypo name="emoji-neutral" color={OLD_GERANIUM} size={16} />
+                  {` ${lastMonthData.totalAverage}`}
                 </ChartLabel>
               </ChartLegend>
             </ChartContainer>
@@ -187,9 +210,13 @@ export default class Reports extends Component<*, State> {
                   <Entypo name="emoji-happy" color={OLD_GERANIUM} size={16} />
                   {` ${lastSixMonthsData.totalGood}`}
                 </ChartLabel>
-                <ChartLabel>
+                <ChartLabel style={{ marginRight: 16 }}>
                   <Entypo name="emoji-sad" color={OLD_GERANIUM} size={16} />
                   {` ${lastSixMonthsData.totalBad}`}
+                </ChartLabel>
+                <ChartLabel>
+                  <Entypo name="emoji-neutral" color={OLD_GERANIUM} size={16} />
+                  {` ${lastSixMonthsData.totalAverage}`}
                 </ChartLabel>
               </ChartLegend>
             </ChartContainer>
@@ -214,9 +241,13 @@ export default class Reports extends Component<*, State> {
                   <Entypo name="emoji-happy" color={OLD_GERANIUM} size={16} />
                   {` ${lastYearData.totalGood}`}
                 </ChartLabel>
-                <ChartLabel>
+                <ChartLabel style={{ marginRight: 16 }}>
                   <Entypo name="emoji-sad" color={OLD_GERANIUM} size={16} />
                   {` ${lastYearData.totalBad}`}
+                </ChartLabel>
+                <ChartLabel>
+                  <Entypo name="emoji-neutral" color={OLD_GERANIUM} size={16} />
+                  {` ${lastYearData.totalAverage}`}
                 </ChartLabel>
               </ChartLegend>
             </ChartContainer>
@@ -239,10 +270,15 @@ export default class Reports extends Component<*, State> {
     return {
       totalGood: dataSet.filter(d => d.result === 'GOOD').length,
       totalBad: dataSet.filter(d => d.result === 'BAD').length,
-      chartData: dataSet.map((ci, i) => ({
-        x: i,
-        y: ci.result === 'GOOD' ? ++ratingResult : --ratingResult,
-      })),
+      totalAverage: dataSet.filter(d => d.result === 'AVERAGE').length,
+      chartData: dataSet.map((ci, i) => {
+        ratingResult = deriveCountFromResult(ci.result, ratingResult);
+
+        return {
+          x: i,
+          y: ratingResult,
+        };
+      }),
     };
   };
 
@@ -255,10 +291,15 @@ export default class Reports extends Component<*, State> {
     return {
       totalGood: dataSet.filter(d => d.result === 'GOOD').length,
       totalBad: dataSet.filter(d => d.result === 'BAD').length,
-      chartData: dataSet.map((ci, i) => ({
-        x: i,
-        y: ci.result === 'GOOD' ? ++ratingResult : --ratingResult,
-      })),
+      totalAverage: dataSet.filter(d => d.result === 'AVERAGE').length,
+      chartData: dataSet.map((ci, i) => {
+        ratingResult = deriveCountFromResult(ci.result, ratingResult);
+
+        return {
+          x: i,
+          y: ratingResult,
+        };
+      }),
     };
   };
 
@@ -271,10 +312,15 @@ export default class Reports extends Component<*, State> {
     return {
       totalGood: dataSet.filter(d => d.result === 'GOOD').length,
       totalBad: dataSet.filter(d => d.result === 'BAD').length,
-      chartData: dataSet.map((ci, i) => ({
-        x: i,
-        y: ci.result === 'GOOD' ? ++ratingResult : --ratingResult,
-      })),
+      totalAverage: dataSet.filter(d => d.result === 'AVERAGE').length,
+      chartData: dataSet.map((ci, i) => {
+        ratingResult = deriveCountFromResult(ci.result, ratingResult);
+
+        return {
+          x: i,
+          y: ratingResult,
+        };
+      }),
     };
   };
 
@@ -287,10 +333,15 @@ export default class Reports extends Component<*, State> {
     return {
       totalGood: dataSet.filter(d => d.result === 'GOOD').length,
       totalBad: dataSet.filter(d => d.result === 'BAD').length,
-      chartData: dataSet.map((ci, i) => ({
-        x: i,
-        y: ci.result === 'GOOD' ? ++ratingResult : --ratingResult,
-      })),
+      totalAverage: dataSet.filter(d => d.result === 'AVERAGE').length,
+      chartData: dataSet.map((ci, i) => {
+        ratingResult = deriveCountFromResult(ci.result, ratingResult);
+
+        return {
+          x: i,
+          y: ratingResult,
+        };
+      }),
     };
   };
 }
