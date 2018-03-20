@@ -24,6 +24,8 @@ type State = {
 const Container = styled(View)`
   flex: 1;
   padding: 48px 24px;
+  align-items: center;
+  justify-content: center;
 `;
 
 const ChartTitle = styled(Text)`
