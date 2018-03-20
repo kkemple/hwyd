@@ -35,8 +35,13 @@ import {
   PENCIL_LEAD,
   ROGUE_PINK,
   ROSY_HIGHLIGHT,
+  CHECKIN_RESULT_TO_EMOJI_MAP,
 } from '../utils/constants';
-import type { CheckInData, CheckIn as CheckInType } from '../utils/types';
+import type {
+  CheckInData,
+  CheckIn as CheckInType,
+  Rating,
+} from '../utils/types';
 
 type Props = {
   navigation: NavigationScreenProp<NavigationStateRoute>,
@@ -56,7 +61,7 @@ type State = {
 const ButtonsContainer = styled(View)`
   align-items: center;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-around;
 `;
 
 const Container = styled(View)`
@@ -67,13 +72,6 @@ const Container = styled(View)`
 
 const ParagraphText = styled(Text)`
   font-family: ${props => props.theme.fonts.regular};
-`;
-
-const Title = styled(Text)`
-  font-family: ${props => `${props.theme.fonts.title}`};
-  font-size: 40;
-  margin-bottom: 36;
-  text-align: center;
 `;
 
 const DisplayDate = styled(Text)`
@@ -191,11 +189,7 @@ export default class CheckIn extends Component<Props, State> {
               key="result"
               color={OLD_GERANIUM}
               size={98}
-              name={
-                this.state.checkIn.result === 'GOOD'
-                  ? 'emoji-happy'
-                  : 'emoji-sad'
-              }
+              name={CHECKIN_RESULT_TO_EMOJI_MAP[this.state.checkIn.result]}
             />,
             !!this.state.checkIn.note && (
               <JournalEntry noTitle key="note" {...this.state.checkIn} />
@@ -228,86 +222,22 @@ export default class CheckIn extends Component<Props, State> {
             <DisplayDate>{this.state.displayDate}</DisplayDate>
           )}
 
-          {!this.state.editing && <Title>How was your day?</Title>}
-
           <ButtonsContainer>
-            <Button.Transparent
-              style={{ marginRight: 8 }}
-              onPress={async () => {
-                let checkIn;
-
-                if (this.state.checkIn) {
-                  const data = {
-                    ...this.state.checkIn,
-                    date: this.state.checkIn.date,
-                    note: this.state.note,
-                    result: 'GOOD',
-                  };
-
-                  checkIn = await editCheckIn(this.state.checkIn.id, data);
-                } else {
-                  checkIn = await addCheckIn({
-                    date: this.state.date,
-                    note: this.state.note,
-                    result: 'GOOD',
-                  });
-                }
-
-                this.setState(
-                  () => ({
-                    checkIn,
-                    editing: false,
-                    showDoneAnimation: true,
-                  }),
-                  () =>
-                    setTimeout(
-                      () => this.setState(() => ({ showDoneAnimation: false })),
-                      DONE_ANIMATION_SPEED,
-                    ),
-                );
-              }}
-            >
+            <Button.Transparent onPress={() => this.onCheckInPress('GOOD')}>
               <ButtonText.Transparent>
-                <Entypo size={98} name="emoji-happy" />
+                <Entypo size={78} name="emoji-happy" />
               </ButtonText.Transparent>
             </Button.Transparent>
 
-            <Button.Transparent
-              onPress={async () => {
-                let checkIn;
-
-                if (this.state.checkIn) {
-                  const data = {
-                    ...this.state.checkIn,
-                    note: this.state.note,
-                    result: 'BAD',
-                  };
-
-                  checkIn = await editCheckIn(this.state.checkIn.id, data);
-                } else {
-                  checkIn = await addCheckIn({
-                    date: this.state.date,
-                    note: this.state.note,
-                    result: 'BAD',
-                  });
-                }
-
-                this.setState(
-                  () => ({
-                    checkIn,
-                    editing: false,
-                    showDoneAnimation: true,
-                  }),
-                  () =>
-                    setTimeout(
-                      () => this.setState(() => ({ showDoneAnimation: false })),
-                      DONE_ANIMATION_SPEED,
-                    ),
-                );
-              }}
-            >
+            <Button.Transparent onPress={() => this.onCheckInPress('AVERAGE')}>
               <ButtonText.Transparent>
-                <Entypo size={98} name="emoji-sad" />
+                <Entypo size={78} name="emoji-neutral" />
+              </ButtonText.Transparent>
+            </Button.Transparent>
+
+            <Button.Transparent onPress={() => this.onCheckInPress('BAD')}>
+              <ButtonText.Transparent>
+                <Entypo size={78} name="emoji-sad" />
               </ButtonText.Transparent>
             </Button.Transparent>
           </ButtonsContainer>
@@ -328,4 +258,37 @@ export default class CheckIn extends Component<Props, State> {
       </Container>
     );
   }
+
+  onCheckInPress = async (result: Rating) => {
+    let checkIn;
+
+    if (this.state.checkIn) {
+      const data = {
+        ...this.state.checkIn,
+        result,
+        note: this.state.note,
+      };
+
+      checkIn = await editCheckIn(this.state.checkIn.id, data);
+    } else {
+      checkIn = await addCheckIn({
+        result,
+        date: this.state.date,
+        note: this.state.note,
+      });
+    }
+
+    this.setState(
+      () => ({
+        checkIn,
+        editing: false,
+        showDoneAnimation: true,
+      }),
+      () =>
+        setTimeout(
+          () => this.setState(() => ({ showDoneAnimation: false })),
+          DONE_ANIMATION_SPEED,
+        ),
+    );
+  };
 }

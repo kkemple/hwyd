@@ -25,3 +25,9 @@ export const REGULAR_FONT: string = 'libre-regular';
 export const ITALIC_FONT: string = 'libre-italic';
 
 export const DONE_ANIMATION_SPEED: number = 3250;
+
+export const CHECKIN_RESULT_TO_EMOJI_MAP = {
+  'BAD': 'emoji-sad',
+  'AVERAGE': 'emoji-neutral',
+  'GOOD': 'emoji-happy',
+}

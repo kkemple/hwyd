@@ -8,7 +8,12 @@ import { Entypo } from '@expo/vector-icons';
 import parse from 'date-fns/parse';
 import format from 'date-fns/format';
 
-import { ROGUE_PINK, ROSY_HIGHLIGHT, OLD_GERANIUM } from '../utils/constants';
+import {
+  ROGUE_PINK,
+  ROSY_HIGHLIGHT,
+  OLD_GERANIUM,
+  CHECKIN_RESULT_TO_EMOJI_MAP,
+} from '../utils/constants';
 
 type Props = {
   itemIndex: number,
@@ -87,7 +92,7 @@ export default class JournalEntry extends Component<Props, *> {
           {!noTitle && (
             <Rating
               color={OLD_GERANIUM}
-              name={result === 'GOOD' ? 'emoji-happy' : 'emoji-sad'}
+              name={CHECKIN_RESULT_TO_EMOJI_MAP[result]}
               size={16}
             />
           )}

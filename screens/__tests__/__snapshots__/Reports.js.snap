@@ -524,7 +524,13 @@ exports[`<Reports /> renders reports for check ins 1`] = `
           />
            4
         </Styled(Text)>
-        <Styled(Text)>
+        <Styled(Text)
+          style={
+            Object {
+              "marginRight": 16,
+            }
+          }
+        >
           <Icon
             allowFontScaling={false}
             color="#cf6a87"
@@ -532,6 +538,15 @@ exports[`<Reports /> renders reports for check ins 1`] = `
             size={16}
           />
            3
+        </Styled(Text)>
+        <Styled(Text)>
+          <Icon
+            allowFontScaling={false}
+            color="#cf6a87"
+            name="emoji-neutral"
+            size={16}
+          />
+           0
         </Styled(Text)>
       </Styled(View)>
     </Styled(View)>
