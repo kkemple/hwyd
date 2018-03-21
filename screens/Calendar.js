@@ -18,7 +18,7 @@ import isAfter from 'date-fns/is_after';
 import isBefore from 'date-fns/is_before';
 
 import CheckIn from './CheckIn';
-import { Button, ButtonText, BackgroundGradient } from '../components';
+import { Button, ButtonText, BackgroundGradient, Loader } from '../components';
 import {
   BLACK,
   BOLD_FONT,
@@ -36,6 +36,7 @@ import {
 import type { CheckIn as CheckInType } from '../utils/types';
 
 type State = {
+  loading: boolean,
   markedDates: {
     [key: string]: {
       marked: boolean,
@@ -60,24 +61,27 @@ const calendarTheme = {
   todayTextColor: OLD_GERANIUM,
 };
 
-const Container = styled(View)`
+const Container = styled(View) `
   flex: 1;
-`;
-
-const ButtonsContainer = styled(View)`
   align-items: center;
   flex-direction: row;
   justify-content: center;
 `;
 
-const Title = styled(Text)`
+const ButtonsContainer = styled(View) `
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+`;
+
+const Title = styled(Text) `
   font-family: ${props => props.theme.fonts.title};
   font-size: 36;
   margin-bottom: 24;
   text-align: center;
 `;
 
-const CheckInModal = styled(View)`
+const CheckInModal = styled(View) `
   background-color: ${props => props.theme.colors.white};
   border-radius: 3px;
   margin: auto;
@@ -89,10 +93,13 @@ export class Calendar extends Component<*, State> {
 
   state = {
     markedDates: {},
+    loading: true
   };
-
   componentWillMount = async () => {
     const checkIns = await getCheckIns();
+    this.setState({
+      loading: false
+    });
     this.setMarkedDates(checkIns);
 
     this.checkInsListener = addCheckInsListener(checkIns => {
@@ -109,14 +116,17 @@ export class Calendar extends Component<*, State> {
       <Container>
         <StatusBar barStyle="light-content" backgroundColor={OLD_GERANIUM} />
         <BackgroundGradient />
-        <CalendarList
-          futureScrollRange={0}
-          markedDates={this.state.markedDates}
-          onDayPress={date => this.props.navigation.push('CheckIn', { date })}
-          pastScrollRange={12}
-          style={{ paddingTop: 24 }}
-          theme={calendarTheme}
-        />
+        {this.state.loading ?
+          <Loader style={{ width: 100, height: 100 }} /> : (
+            <CalendarList
+              futureScrollRange={0}
+              markedDates={this.state.markedDates}
+              onDayPress={date => this.props.navigation.push('CheckIn', { date })}
+              pastScrollRange={12}
+              style={{ paddingTop: 24 }}
+              theme={calendarTheme}
+            />
+          )}
       </Container>
     );
   }

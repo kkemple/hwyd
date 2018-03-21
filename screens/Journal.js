@@ -1,12 +1,12 @@
 /* @flow */
 
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Dimensions, StatusBar, StyleSheet, Text, View } from 'react-native';
 import styled from 'styled-components';
 import SideSwipe from 'react-native-sideswipe';
 import { sortBy } from 'lodash';
 
-import { BackgroundGradient, JournalEntry } from '../components';
+import { BackgroundGradient, JournalEntry, Loader } from '../components';
 import {
   addCheckInsListener,
   getCheckIns,
@@ -17,23 +17,26 @@ import type { CheckIn } from '../utils/types';
 
 type State = {
   notes: CheckIn[],
+  loading: boolean
 };
 
-const Container = styled(View)`
+const Container = styled(View) `
   flex: 1;
+  align-items: center;
+  justify-content: center;
 `;
 
-const Carousel = styled(SideSwipe)`
+const Carousel = styled(SideSwipe) `
   margin: auto;
 `;
 
-const SingleEntry = styled(View)`
+const SingleEntry = styled(View) `
   align-items: center;
   flex: 1;
   justify-content: center;
 `;
 
-const Title = styled(Text)`
+const Title = styled(Text) `
   color: ${props => props.theme.colors.oldGeranium};
   font-family: ${props => props.theme.fonts.italic};
   font-size: 24px;
@@ -41,7 +44,7 @@ const Title = styled(Text)`
   margin-bottom: 0;
 `;
 
-const NoEntries = styled(Text)`
+const NoEntries = styled(Text) `
   color: ${props => props.theme.colors.oldGeranium};
   font-family: ${props => props.theme.fonts.italic};
   font-size: 18px;
@@ -55,6 +58,7 @@ export default class Journal extends Component<*, State> {
 
   state = {
     notes: [],
+    loading: true
   };
 
   componentWillMount = async () => {
@@ -63,11 +67,13 @@ export default class Journal extends Component<*, State> {
     this.checkInsListener = addCheckInsListener(checkIns => {
       this.setState(() => ({
         notes: sortBy(checkIns.filter(c => !!c.note), 'date').reverse(),
+        loading: false
       }));
     });
 
     this.setState(() => ({
       notes: sortBy(checkIns.filter(c => !!c.note), 'date').reverse(),
+      loading: false
     }));
   };
 
@@ -81,31 +87,36 @@ export default class Journal extends Component<*, State> {
       <Container>
         <StatusBar barStyle="light-content" backgroundColor={OLD_GERANIUM} />
         <BackgroundGradient />
+        {this.state.loading ?
+          <Loader style={{ width: 100, height: 100 }} /> : (
+            <Fragment>
+              <Title>Journal</Title>
+              {
+                this.state.notes.length === 1 && (
+                  <SingleEntry>
+                    <JournalEntry {...this.state.notes[0]} />
+                  </SingleEntry>
+                )
+              }
 
-        <Title>Journal</Title>
+              {this.state.notes.length > 1 && (
+                <Carousel
+                  data={this.state.notes}
+                  itemWidth={JournalEntry.WIDTH}
+                  threshold={100}
+                  contentOffset={offset}
+                  contentContainerStyle={{ alignItems: 'center' }}
+                  renderItem={({ item, ...rest }) => (
+                    <JournalEntry {...rest} {...item} />
+                  )}
+                />
+              )}
 
-        {this.state.notes.length === 1 && (
-          <SingleEntry>
-            <JournalEntry {...this.state.notes[0]} />
-          </SingleEntry>
-        )}
-
-        {this.state.notes.length > 1 && (
-          <Carousel
-            data={this.state.notes}
-            itemWidth={JournalEntry.WIDTH}
-            threshold={100}
-            contentOffset={offset}
-            contentContainerStyle={{ alignItems: 'center' }}
-            renderItem={({ item, ...rest }) => (
-              <JournalEntry {...rest} {...item} />
-            )}
-          />
-        )}
-
-        {this.state.notes.length === 0 && (
-          <NoEntries>No entries yet.</NoEntries>
-        )}
+              {this.state.notes.length === 0 && (
+                <NoEntries>No entries yet.</NoEntries>
+              )}
+            </Fragment>
+          )}
       </Container>
     );
   }

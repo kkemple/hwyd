@@ -2,13 +2,13 @@
 
 import cuid from 'cuid';
 
-import { setLocalData, getLocalData } from './storage';
+import { setUserData, getUserData } from './storage';
 import type { Store, CheckIn, CheckInData } from './types';
 
 let listeners = [];
 
 export const addCheckInsListener = (listener: (CheckIn[]) => void): number =>
-  listeners.push(listener);
+listeners.push(listener);
 
 export const removeCheckInsListener = (index: number) => {
   listeners = listeners.filter((_, i) => i !== index);
@@ -19,7 +19,7 @@ export const addCheckIn = async (
 ): Promise<CheckIn> => {
   const checkIn = { ...checkInData, id: cuid() };
 
-  await setLocalData((store: Store) => ({
+  await setUserData((store: Store) => ({
     check_ins: [...store.check_ins, checkIn],
   }));
 
@@ -30,7 +30,7 @@ export const addCheckIn = async (
 };
 
 export const removeCheckIn = async (id: string): Promise<void> => {
-  await setLocalData((store: Store) => ({
+  await setUserData((store: Store) => ({
     check_ins: store.check_ins.filter(c => c.id !== id),
   }));
 
@@ -42,7 +42,7 @@ export const editCheckIn = async (
   id: string,
   checkIn: CheckIn,
 ): Promise<CheckIn | void> => {
-  await setLocalData((store: Store) => ({
+  await setUserData((store: Store) => ({
     check_ins: store.check_ins.map(ci => {
       if (ci.id !== id) return ci;
 
@@ -57,6 +57,6 @@ export const editCheckIn = async (
 };
 
 export const getCheckIns = async (): Promise<CheckIn[]> => {
-  const store: Store = await getLocalData();
+  const store: Store = await getUserData();
   return store.check_ins;
 };

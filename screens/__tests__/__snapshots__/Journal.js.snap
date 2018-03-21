@@ -9,47 +9,13 @@ exports[`<Journal /> renders a carousel of notes 1`] = `
     showHideTransition="fade"
   />
   <BackgroundGradient />
-  <Styled(Text)>
-    Journal
-  </Styled(Text)>
-  <Styled(SideSwipe)
-    contentContainerStyle={
+  <Loader
+    style={
       Object {
-        "alignItems": "center",
+        "height": 100,
+        "width": 100,
       }
     }
-    contentOffset={209}
-    data={
-      Array [
-        Object {
-          "date": "03-02-2018",
-          "id": 0,
-          "note": "Today was...",
-          "result": "GOOD",
-        },
-        Object {
-          "date": "03-03-2018",
-          "id": 1,
-          "note": "Today was...",
-          "result": "GOOD",
-        },
-        Object {
-          "date": "03-04-2018",
-          "id": 2,
-          "note": "Today was...",
-          "result": "BAD",
-        },
-        Object {
-          "date": "03-05-2018",
-          "id": 3,
-          "note": "Today was...",
-          "result": "BAD",
-        },
-      ]
-    }
-    itemWidth={332}
-    renderItem={[Function]}
-    threshold={100}
   />
 </Styled(View)>
 `;
@@ -63,17 +29,14 @@ exports[`<Journal /> renders a single note 1`] = `
     showHideTransition="fade"
   />
   <BackgroundGradient />
-  <Styled(Text)>
-    Journal
-  </Styled(Text)>
-  <Styled(View)>
-    <JournalEntry
-      date="03-02-2018"
-      id={0}
-      note="Today was..."
-      result="GOOD"
-    />
-  </Styled(View)>
+  <Loader
+    style={
+      Object {
+        "height": 100,
+        "width": 100,
+      }
+    }
+  />
 </Styled(View)>
 `;
 
@@ -86,11 +49,13 @@ exports[`<Journal /> renders with no notes 1`] = `
     showHideTransition="fade"
   />
   <BackgroundGradient />
-  <Styled(Text)>
-    Journal
-  </Styled(Text)>
-  <Styled(Text)>
-    No entries yet.
-  </Styled(Text)>
+  <Loader
+    style={
+      Object {
+        "height": 100,
+        "width": 100,
+      }
+    }
+  />
 </Styled(View)>
 `;
