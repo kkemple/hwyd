@@ -132,6 +132,7 @@ exports[`<CheckIn /> renders loading state 1`] = `
     barStyle="light-content"
     showHideTransition="fade"
   />
+  <BackgroundGradient />
   <Loader
     style={
       Object {

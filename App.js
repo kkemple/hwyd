@@ -114,6 +114,7 @@ export default class App extends Component<*, State> {
       storageBucket: "hwd-app-3b44a.appspot.com",
       messagingSenderId: "758299686169"
     };
+
     firebase.initializeApp(config);
 
     firebase.auth().onAuthStateChanged((user) => {

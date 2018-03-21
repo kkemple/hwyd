@@ -34,16 +34,10 @@ exports[`renders check in screen 1`] = `
     className="c1"
     onLayout={[Function]}
     style={
-      Array [
-        Object {
-          "backgroundColor": "rgba(255, 255, 255, 0.1)",
-          "borderRadius": 0,
-        },
-        Object {
-          "height": 180,
-          "width": 180,
-        },
-      ]
+      Object {
+        "height": 180,
+        "width": 180,
+      }
     }
   />
 </View>
