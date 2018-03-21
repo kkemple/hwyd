@@ -79,10 +79,12 @@ const ChartLabel = styled(Text) `
   font-size: 14;
 `;
 
-const Title = styled(Text) `
-  font-family: ${props => props.theme.fonts.title};
-  font-size: 40;
-  margin-bottom: 36;
+const Title = styled(Text)`
+  color: ${props => props.theme.colors.oldGeranium};
+  font-family: ${props => props.theme.fonts.italic};
+  font-size: 24px;
+  margin: 48px 24px;
+  margin-bottom: 0;
   text-align: center;
 `;
 
@@ -182,21 +184,112 @@ export default class Reports extends Component<*, State> {
         </Container>
       );
     }
-    {
-      const lastWeekData = this.build7DayData();
-      const lastMonthData = this.build30DayData();
-      const lastSixMonthsData = this.build180DayData();
-      const lastYearData = this.build365DayData();
+    
+    const lastWeekData = this.build7DayData();
+    const lastMonthData = this.build30DayData();
+    const lastSixMonthsData = this.build180DayData();
+    const lastYearData = this.build365DayData();
 
-      return (
-        <Container>
-          <StatusBar barStyle="light-content" backgroundColor={OLD_GERANIUM} />
-          <BackgroundGradient />
-          <ChartsContainer
-            contentContainerStyle={{ alignItems: 'center', paddingVertical: 36 }}
-          >
-            <ChartContainer key={'seven-day-overview'}>
-              <ChartTitle>LAST WEEK</ChartTitle>
+    return (
+      <Container>
+        <StatusBar barStyle="light-content" backgroundColor={OLD_GERANIUM} />
+        <BackgroundGradient />
+        <ChartsContainer
+          contentContainerStyle={{ alignItems: 'center', paddingVertical: 48 }}
+        >
+          <ChartContainer key={'seven-day-overview'}>
+            <ChartTitle>LAST WEEK</ChartTitle>
+            <VictoryLine
+              width={300}
+              height={150}
+              style={{
+                data: {
+                  stroke: OLD_GERANIUM,
+                  strokeWidth: 2,
+                },
+              }}
+              data={lastWeekData.chartData}
+            />
+            <ChartLegend>
+              <ChartLabel style={{ marginRight: 16 }}>
+                <Entypo name="emoji-happy" color={OLD_GERANIUM} size={16} />
+                {` ${lastWeekData.totalGood}`}
+              </ChartLabel>
+              <ChartLabel style={{ marginRight: 16 }}>
+                <Entypo name="emoji-sad" color={OLD_GERANIUM} size={16} />
+                {` ${lastWeekData.totalBad}`}
+              </ChartLabel>
+              <ChartLabel>
+                <Entypo name="emoji-neutral" color={OLD_GERANIUM} size={16} />
+                {` ${lastWeekData.totalAverage}`}
+              </ChartLabel>
+            </ChartLegend>
+          </ChartContainer>
+          {checkIns.length > 30 && (
+            <ChartContainer key={'thirty-day-overview'}>
+              <ChartTitle>LAST MONTH</ChartTitle>
+              <VictoryLine
+                width={300}
+                height={150}
+                style={{
+                  data: {
+                    stroke: OLD_GERANIUM,
+                    strokeWidth: 2,
+                  },
+                }}
+                data={lastMonthData.chartData}
+              />
+              <ChartLegend>
+                <ChartLabel style={{ marginRight: 16 }}>
+                  <Entypo name="emoji-happy" color={OLD_GERANIUM} size={16} />
+                  {` ${lastMonthData.totalGood}`}
+                </ChartLabel>
+                <ChartLabel style={{ marginRight: 16 }}>
+                  <Entypo name="emoji-sad" color={OLD_GERANIUM} size={16} />
+                  {` ${lastMonthData.totalBad}`}
+                </ChartLabel>
+                <ChartLabel>
+                  <Entypo name="emoji-neutral" color={OLD_GERANIUM} size={16} />
+                  {` ${lastMonthData.totalAverage}`}
+                </ChartLabel>
+              </ChartLegend>
+            </ChartContainer>
+          )}
+
+          {checkIns.length > 180 && (
+            <ChartContainer key={'one-hundred-eighty-day-overview'}>
+              <ChartTitle>LAST SIX MONTHS</ChartTitle>
+              <VictoryLine
+                width={300}
+                height={150}
+                style={{
+                  data: {
+                    stroke: OLD_GERANIUM,
+                    strokeWidth: 2,
+                  },
+                }}
+                data={lastSixMonthsData.chartData}
+              />
+              <ChartLegend>
+                <ChartLabel style={{ marginRight: 16 }}>
+                  <Entypo name="emoji-happy" color={OLD_GERANIUM} size={16} />
+                  {` ${lastSixMonthsData.totalGood}`}
+                </ChartLabel>
+                <ChartLabel style={{ marginRight: 16 }}>
+                  <Entypo name="emoji-sad" color={OLD_GERANIUM} size={16} />
+                  {` ${lastSixMonthsData.totalBad}`}
+                </ChartLabel>
+                <ChartLabel>
+                  <Entypo name="emoji-neutral" color={OLD_GERANIUM} size={16} />
+                  {` ${lastSixMonthsData.totalAverage}`}
+                </ChartLabel>
+              </ChartLegend>
+            </ChartContainer>
+          )}
+
+          {checkIns.length > 220 && (
+            <ChartContainer key={'one-year-overview'}>
+              <ChartTitle>LAST YEAR</ChartTitle>
               <VictoryLine
                 width={300}
                 height={150}

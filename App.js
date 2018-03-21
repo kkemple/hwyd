@@ -53,9 +53,13 @@ const TabbedNavigation = TabNavigator(
       activeBackgroundColor: OLD_GERANIUM,
       style: {
         backgroundColor: OLD_GERANIUM,
+        paddingTop: 15,
       },
       indicatorStyle: {
         backgroundColor: ROGUE_PINK,
+      },
+      labelStyle: {
+        paddingTop: 5,
       },
     },
     navigationOptions: ({ navigation }) => ({
