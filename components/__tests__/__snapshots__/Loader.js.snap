@@ -3,15 +3,6 @@
 exports[`<Loader /> renders a loading animation 1`] = `
 <Styled(View)
   onLayout={[Function]}
-  style={
-    Array [
-      Object {
-        "backgroundColor": "rgba(255, 255, 255, 0.1)",
-        "borderRadius": 50,
-      },
-      undefined,
-    ]
-  }
 >
   <AnimatedComponent
     loop={true}

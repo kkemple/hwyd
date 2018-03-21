@@ -46,16 +46,7 @@ export default class Loader extends Component<*, State> {
 
   render = () => {
     return (
-      <Container
-        onLayout={this.onLayout}
-        style={[
-          {
-            borderRadius: this.state.width / 2,
-            backgroundColor: 'rgba(255, 255, 255, 0.1)',
-          },
-          this.props.style,
-        ]}
-      >
+      <Container onLayout={this.onLayout} style={this.props.style}>
         {this.state.width > 0 &&
           this.state.height > 0 && (
             <Lottie
