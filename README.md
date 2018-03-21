@@ -50,3 +50,15 @@ yarn test
 yarn flow
 yarn lint
 ```
+
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore -->
+| [<img src="https://avatars0.githubusercontent.com/u/1051509?v=4" width="100px;"/><br /><sub><b>Sara Vieira</b></sub>](http://iamsaravieira.com)<br />[💻](https://github.com/kkemple/hwyd/commits?author=SaraVieira "Code") [🤔](#ideas-SaraVieira "Ideas, Planning, & Feedback") [👀](#review-SaraVieira "Reviewed Pull Requests") [⚠️](https://github.com/kkemple/hwyd/commits?author=SaraVieira "Tests") | [<img src="https://avatars1.githubusercontent.com/u/74381?v=4" width="100px;"/><br /><sub><b>Ricky de Laveaga</b></sub>](https://rdela.com)<br />[💻](https://github.com/kkemple/hwyd/commits?author=rdela "Code") [🎨](#design-rdela "Design") | [<img src="https://avatars3.githubusercontent.com/u/3629876?v=4" width="100px;"/><br /><sub><b>Kurtis Kemple</b></sub>](https://twitter.com/kurtiskemple)<br />[💻](https://github.com/kkemple/hwyd/commits?author=kkemple "Code") [🎨](#design-kkemple "Design") [📖](https://github.com/kkemple/hwyd/commits?author=kkemple "Documentation") [🤔](#ideas-kkemple "Ideas, Planning, & Feedback") [👀](#review-kkemple "Reviewed Pull Requests") [⚠️](https://github.com/kkemple/hwyd/commits?author=kkemple "Tests") |
+| :---: | :---: | :---: |
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
+
+This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!
