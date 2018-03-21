@@ -12,32 +12,28 @@
     "pre:commit": "lint-staged",
     "flow": "glow",
     "flow:typed": "flow-typed install",
-    "lint": "eslint --fix **/*.js"
+    "lint": "eslint --fix **/*.js",
+    "contributors:add": "all-contributors add",
+    "contributors:generate": "all-contributors generate"
   },
   "jest": {
     "preset": "jest-expo",
     "cacheDirectory": "<rootDir>/.jestCache",
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ],
+    "snapshotSerializers": ["enzyme-to-json/serializer"],
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/mock-file.js"
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+        "<rootDir>/__mocks__/mock-file.js"
     },
     "transformIgnorePatterns": [
       "node_modules/(?!(react-native|react-*|expo|@expo-*|victory-*))"
     ],
-    "setupFiles": [
-      "<rootDir>/test-setup.js"
-    ]
+    "setupFiles": ["<rootDir>/test-setup.js"]
   },
   "lint-staged": {
-    "*.js": [
-      "prettier --write *.js",
-      "glow",
-      "jest"
-    ]
+    "*.js": ["prettier --write *.js", "glow", "jest"]
   },
   "devDependencies": {
+    "all-contributors-cli": "^4.11.1",
     "babel-eslint": "^8.2.2",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
