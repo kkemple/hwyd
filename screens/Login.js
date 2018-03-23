@@ -64,13 +64,6 @@ const LoginWith = styled(ButtonText.Outline) `
     `}
 `;
 
-const LoginText = styled(View) `
-  margin-left: 10px;
-  width: 12px;
-  height: 12px;
-  margin-top: 14px;
-`;
-
 const Title = styled(Text) `
   color: ${props => props.theme.colors.oldGeranium};
   font-family: ${props => props.theme.fonts.italic};
@@ -183,12 +176,12 @@ export default class Login extends Component<*, State> {
         </ButtonText.Default>
         <Title>OR</Title>
         <LoginWith type="submit" onPress={this.onFacebookLogin.bind(this)}>
-          <Text>Continue with</Text>
-          <LoginText><Entypo name="facebook" size={12} color="#fff" /></LoginText>
+          <Text>Continue with {'  '}</Text>
+          <Entypo name="facebook" size={12} color="#fff" />
         </LoginWith>
         <LoginWith google type="submit" onPress={this.onGoogleLogin.bind(this)}>
-          <Text>Continue with</Text>
-          <LoginText><Entypo name="google-" size={12} color="#fff" /></LoginText>
+          <Text>Continue with {'  '}</Text>
+          <Entypo name="google-" size={12} color="#fff" />
         </LoginWith>
       </Container>
     );
