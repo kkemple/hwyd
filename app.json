@@ -9,6 +9,17 @@
     "githubUrl": "https://github.com/kkemple/hwyd",
     "orientation": "portrait",
     "primaryColor": "#cf6a87",
+    "icon": "./assets/icons/hwyd-icon-sq-1024.png",
+    "ios": {
+      "icon": "./assets/icons/hwyd-icon-sq-1024.png"
+    },
+    "android": {
+      "icon": "./assets/icons/hwyd-icon-circle-full-1024.png"
+    },
+    "splash": {
+      "image": "./assets/icons/hwyd-splash-1242x2436.png",
+      "resizeMode": "cover"
+    },
     "androidStatusBar": {
       "backgroundColor": "#cf6a87"
     }
