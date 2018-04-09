@@ -42,6 +42,7 @@ const Input = ({ label, ...props }) => (
         <Label>{label.toUpperCase()}</Label>
         <InputStyled
             autoCorrect={false}
+            underlineColorAndroid="rgba(0,0,0,0)"
             {...props}
         />
     </Container>
